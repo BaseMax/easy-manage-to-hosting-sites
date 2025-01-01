@@ -1,12 +1,46 @@
 FROM php:8.1-fpm
 
-RUN apt-get update && apt-get install -y \
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
+    libzip-dev \
+    libxml2-dev \
+    libonig-dev \
     zip unzip unrar \
-    screenfetch neofetch htop \
+    curl wget git vim nano \
+    screenfetch neofetch htop net-tools procps \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql
+    && docker-php-ext-install -j$(nproc) \
+       gd \
+       mysqli \
+       pdo \
+       pdo_mysql \
+       zip \
+       intl \
+       mbstring \
+       soap \
+       xml \
+    && pecl install xdebug redis \
+    && docker-php-ext-enable xdebug redis \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN wget -qO /tmp/ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz && \
+    tar -xzf /tmp/ioncube.tar.gz -C /tmp && \
+    mv /tmp/ioncube/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ && \
+    echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini && \
+    rm -rf /tmp/ioncube /tmp/ioncube.tar.gz
 
 COPY ./config/php/php.ini /usr/local/etc/php/conf.d/php.ini
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN useradd -m -u 1000 phpuser && chown -R phpuser:phpuser /var/www/html
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+CMD ["php-fpm"]
