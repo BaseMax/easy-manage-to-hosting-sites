@@ -5,9 +5,12 @@ services:
     image: nginx
     container_name: wp_maxbase_nginx
     volumes:
+      - ./nginx.conf:/etc/nginx/templates/default.conf.template
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./logs/nginx:/var/log/nginx
       - ./root:/var/www/html
+    environment:
+      - NGINX_HOST=${DOMAIN_NAME}
     ports:
       - "80:80"
       - "443:443"
