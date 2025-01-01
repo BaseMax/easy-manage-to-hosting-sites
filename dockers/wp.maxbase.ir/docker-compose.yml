@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx
+    image: nginx:alpine
     container_name: ${NAME}_nginx
     volumes:
       - ./nginx.conf:/etc/nginx/templates/default.conf.template
@@ -31,7 +31,7 @@ services:
       - wp_network
 
   mariadb:
-    image: mariadb
+    image: mariadb:alpine
     container_name: ${NAME}_db
     volumes:
       - ./database:/var/lib/mysql

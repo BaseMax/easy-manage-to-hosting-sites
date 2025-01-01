@@ -14,28 +14,29 @@ RUN apk --no-cache add \
     icu-dev \
     libsodium \
     oniguruma-dev \
+    gnu-libiconv-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
-       gd \
-       mysqli \
-       pdo \
-       pdo_mysql \
-       zip \
-       intl \
-       mbstring \
-       soap \
-       xml \
-       opcache \
-       iconv \
-       json \
-       filter \
-       hash \
-       curl \
-       dom \
-       fileinfo \
-       readline \
-       gettext \
-       date \
+        gd \
+        mysqli \
+        pdo \
+        pdo_mysql \
+        zip \
+        intl \
+        mbstring \
+        soap \
+        xml \
+        opcache \
+        iconv \
+        json \
+        filter \
+        hash \
+        curl \
+        dom \
+        fileinfo \
+        readline \
+        gettext \
+        date \
     && pecl install xdebug redis \
     && docker-php-ext-enable xdebug redis \
     && apk del curl wget git bash nano
