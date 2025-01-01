@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:1.22
+    volumes:
+      - ./config/nginx/wp.maxbase.ir.conf:/etc/nginx/conf.d/wp.maxbase.ir.conf
+      - ./logs/nginx:/var/log/nginx
+      - ./site1/wordpress:/var/www/html/wp.maxbase.ir
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    volumes:
+      - ./config/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./site1/wordpress:/var/www/html/site1
+      - ./logs/php:/var/log/php
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker"
+
+  mariadb:
+    image: mariadb:10.6
+    volumes:
+      - ./site1/db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: wp1_db
+      MYSQL_USER: wp1_user
+      MYSQL_PASSWORD: wp1_pass
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: your_root_password
+    ports:
+      - "8081:80"
+    depends_on:
+      - mariadb
+
+volumes:
+  site1_db_data:
