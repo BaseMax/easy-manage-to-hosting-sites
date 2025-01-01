@@ -1,0 +1,4 @@
+dockers/*/database/
+dockers/*/root/
+dockers/*/logs/nginx/
+dockers/*/logs/php/
