@@ -3,11 +3,12 @@ services:
     image: nginx:1.22
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
-      - ./site1/wordpress:/var/www/html/site1
-      - ./site2/wordpress:/var/www/html/site2
-      - ./site3/wordpress:/var/www/html/site3
-      - ./site4/wordpress:/var/www/html/site4
       - ./logs/nginx:/var/log/nginx
+      - ./site1/wordpress:/var/www/html/wp.maxbase.ir
+      - ./site2/wordpress:/var/www/html/vestaydesign.com
+      - ./site3/wordpress:/var/www/html/yasnachap.ir
+      - ./site4/wordpress:/var/www/html/mrp30.com
+      - ./site4/wordpress:/var/www/html/vestayshiraz.com
     ports:
       - "80:80"
       - "443:443"
