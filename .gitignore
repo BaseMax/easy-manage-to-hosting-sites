@@ -11,3 +11,5 @@ dockers/*/logs/filebrowser/
 dockers/*/logs/filebrowser/filebrowser.log
 dockers/*/database/filemanager/
 dockers/*/database/filemanager/filebrowser.db
+dockers/*/database/phpmyadmin/
+dockers/*/database/phpmyadmin/*
