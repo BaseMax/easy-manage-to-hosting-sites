@@ -5,9 +5,9 @@ RUN rm -rf /tmp/* /usr/src/php/ext/*
 RUN apk --no-cache add \
     autoconf \
     libtool \
-    pkgconfig
-
-RUN apk --no-cache add \
+    pkgconfig \
+    zlib-dev \
+    build-base \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
@@ -22,33 +22,36 @@ RUN apk --no-cache add \
     libsodium \
     oniguruma-dev \
     gnu-libiconv \
-    gnu-libiconv-dev \
-    build-base \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        gd \
-        mysqli \
-        pdo \
-        pdo_mysql \
-        zip \
-        intl \
-        mbstring \
-        soap \
-        xml \
-        opcache \
-        json \
-        filter \
-        hash \
-        curl \
-        dom \
-        fileinfo \
-        readline \
-        gettext \
-        date \
-    && docker-php-ext-configure iconv --with-iconv=/usr --with-libiconv \
-    && pecl install xdebug redis \
-    && docker-php-ext-enable xdebug redis \
-    && apk del curl wget git bash nano
+    gnu-libiconv-dev
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-install -j$(nproc) mysqli
+RUN docker-php-ext-install -j$(nproc) pdo
+RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN docker-php-ext-install -j$(nproc) zip
+RUN docker-php-ext-install -j$(nproc) intl
+RUN docker-php-ext-install -j$(nproc) mbstring
+RUN docker-php-ext-install -j$(nproc) soap
+RUN docker-php-ext-install -j$(nproc) xml
+RUN docker-php-ext-install -j$(nproc) opcache
+RUN docker-php-ext-install -j$(nproc) json
+RUN docker-php-ext-install -j$(nproc) filter
+RUN docker-php-ext-install -j$(nproc) hash
+RUN docker-php-ext-install -j$(nproc) curl
+RUN docker-php-ext-install -j$(nproc) dom
+RUN docker-php-ext-install -j$(nproc) fileinfo
+RUN docker-php-ext-install -j$(nproc) readline
+RUN docker-php-ext-install -j$(nproc) gettext
+RUN docker-php-ext-install -j$(nproc) date
+
+RUN docker-php-ext-configure iconv --with-iconv=/usr --with-libiconv
+
+RUN pecl install xdebug redis
+
+RUN docker-php-ext-enable xdebug redis
+
+RUN apk del curl wget git bash nano
 
 RUN ls /usr/src/php/ext/opcache/modules/
  
