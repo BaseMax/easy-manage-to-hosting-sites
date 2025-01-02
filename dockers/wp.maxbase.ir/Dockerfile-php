@@ -41,7 +41,8 @@ RUN apk add \
     ncurses \
     gettext-dev \
     gettext \
-    libc6-compat
+    libc6-compat \
+    libudev-zero
 
 RUN apk add --update linux-headers
 RUN pecl install xdebug redis
