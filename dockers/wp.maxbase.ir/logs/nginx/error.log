@@ -1,0 +1,78 @@
+2025/01/02 07:26:27 [notice] 1#1: using the "epoll" event method
+2025/01/02 07:26:27 [notice] 1#1: nginx/1.27.3
+2025/01/02 07:26:27 [notice] 1#1: built by gcc 13.2.1 20240309 (Alpine 13.2.1_git20240309) 
+2025/01/02 07:26:27 [notice] 1#1: OS: Linux 5.15.167.4-microsoft-standard-WSL2
+2025/01/02 07:26:27 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/01/02 07:26:27 [notice] 1#1: start worker processes
+2025/01/02 07:26:27 [notice] 1#1: start worker process 36
+2025/01/02 07:26:27 [notice] 1#1: start worker process 37
+2025/01/02 07:26:27 [notice] 1#1: start worker process 38
+2025/01/02 07:26:27 [notice] 1#1: start worker process 39
+2025/01/02 07:26:27 [notice] 1#1: start worker process 40
+2025/01/02 07:26:27 [notice] 1#1: start worker process 41
+2025/01/02 07:26:27 [notice] 1#1: start worker process 42
+2025/01/02 07:26:27 [notice] 1#1: start worker process 43
+2025/01/02 07:43:00 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2025/01/02 07:43:00 [notice] 38#38: gracefully shutting down
+2025/01/02 07:43:00 [notice] 40#40: gracefully shutting down
+2025/01/02 07:43:00 [notice] 36#36: gracefully shutting down
+2025/01/02 07:43:00 [notice] 43#43: gracefully shutting down
+2025/01/02 07:43:00 [notice] 39#39: gracefully shutting down
+2025/01/02 07:43:00 [notice] 42#42: gracefully shutting down
+2025/01/02 07:43:00 [notice] 38#38: exiting
+2025/01/02 07:43:00 [notice] 38#38: exit
+2025/01/02 07:43:00 [notice] 37#37: gracefully shutting down
+2025/01/02 07:43:00 [notice] 37#37: exiting
+2025/01/02 07:43:00 [notice] 41#41: gracefully shutting down
+2025/01/02 07:43:00 [notice] 40#40: exiting
+2025/01/02 07:43:00 [notice] 43#43: exiting
+2025/01/02 07:43:00 [notice] 43#43: exit
+2025/01/02 07:43:00 [notice] 36#36: exiting
+2025/01/02 07:43:00 [notice] 39#39: exiting
+2025/01/02 07:43:00 [notice] 42#42: exiting
+2025/01/02 07:43:00 [notice] 37#37: exit
+2025/01/02 07:43:00 [notice] 41#41: exiting
+2025/01/02 07:43:00 [notice] 40#40: exit
+2025/01/02 07:43:00 [notice] 36#36: exit
+2025/01/02 07:43:00 [notice] 39#39: exit
+2025/01/02 07:43:00 [notice] 42#42: exit
+2025/01/02 07:43:00 [notice] 41#41: exit
+2025/01/02 07:43:12 [notice] 1#1: using the "epoll" event method
+2025/01/02 07:43:12 [notice] 1#1: nginx/1.27.3
+2025/01/02 07:43:12 [notice] 1#1: built by gcc 13.2.1 20240309 (Alpine 13.2.1_git20240309) 
+2025/01/02 07:43:12 [notice] 1#1: OS: Linux 5.15.167.4-microsoft-standard-WSL2
+2025/01/02 07:43:12 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/01/02 07:43:12 [notice] 1#1: start worker processes
+2025/01/02 07:43:12 [notice] 1#1: start worker process 36
+2025/01/02 07:43:12 [notice] 1#1: start worker process 37
+2025/01/02 07:43:12 [notice] 1#1: start worker process 38
+2025/01/02 07:43:12 [notice] 1#1: start worker process 39
+2025/01/02 07:43:12 [notice] 1#1: start worker process 40
+2025/01/02 07:43:12 [notice] 1#1: start worker process 41
+2025/01/02 07:43:12 [notice] 1#1: start worker process 42
+2025/01/02 07:43:12 [notice] 1#1: start worker process 43
+2025/01/02 07:45:13 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2025/01/02 07:45:13 [notice] 36#36: gracefully shutting down
+2025/01/02 07:45:13 [notice] 37#37: gracefully shutting down
+2025/01/02 07:45:13 [notice] 37#37: exiting
+2025/01/02 07:45:13 [notice] 38#38: gracefully shutting down
+2025/01/02 07:45:13 [notice] 39#39: gracefully shutting down
+2025/01/02 07:45:13 [notice] 40#40: gracefully shutting down
+2025/01/02 07:45:13 [notice] 41#41: gracefully shutting down
+2025/01/02 07:45:13 [notice] 42#42: gracefully shutting down
+2025/01/02 07:45:13 [notice] 43#43: gracefully shutting down
+2025/01/02 07:45:13 [notice] 36#36: exiting
+2025/01/02 07:45:13 [notice] 37#37: exit
+2025/01/02 07:45:13 [notice] 38#38: exiting
+2025/01/02 07:45:13 [notice] 39#39: exiting
+2025/01/02 07:45:13 [notice] 40#40: exiting
+2025/01/02 07:45:13 [notice] 40#40: exit
+2025/01/02 07:45:13 [notice] 41#41: exiting
+2025/01/02 07:45:13 [notice] 42#42: exiting
+2025/01/02 07:45:13 [notice] 43#43: exiting
+2025/01/02 07:45:13 [notice] 36#36: exit
+2025/01/02 07:45:13 [notice] 38#38: exit
+2025/01/02 07:45:13 [notice] 39#39: exit
+2025/01/02 07:45:13 [notice] 41#41: exit
+2025/01/02 07:45:13 [notice] 42#42: exit
+2025/01/02 07:45:13 [notice] 43#43: exit
