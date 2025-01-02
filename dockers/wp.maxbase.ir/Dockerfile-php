@@ -2,8 +2,24 @@ FROM php:8.1-fpm-alpine
 
 RUN rm -rf /tmp/* /usr/src/php/ext/*
 
-RUN apk --no-cache add \
+RUN chmod -R 777 /tmp
+
+RUN apk update
+
+RUN apk upgrade
+
+RUN apk add --no-cache \
+    gcc \
+    g++ \
+    cmake \
+    make \
     autoconf \
+    libedit \
+    openssl \
+    openssl-dev \
+    libedit-dev \
+    libcurl \
+    curl-dev \
     libtool \
     pkgconfig \
     zlib-dev \
@@ -16,16 +32,39 @@ RUN apk --no-cache add \
     curl \
     wget \
     git \
+    readline-dev \
+    readline \
     bash \
     nano \
     icu-dev \
     libsodium \
     oniguruma-dev \
     gnu-libiconv \
-    gnu-libiconv-dev
+    gnu-libiconv-dev \
+    ncurses-dev \
+    ncurses \
+    gettext-dev \
+    gettext
+
+# RUN apk add --no-cache php81-curl
+
+# RUN docker-php-ext-configure readline --with-readline=/usr/include/editline
+# RUN docker-php-ext-install -j$(nproc) readline
+
+RUN docker-php-ext-install -j$(nproc) gettext
+
+RUN docker-php-ext-install -j$(nproc) curl
+
+# RUN docker-php-ext-install -j$(nproc) date
+# RUN docker-php-ext-install -j$(nproc) json
+RUN docker-php-ext-install -j$(nproc) filter
+# RUN docker-php-ext-install -j$(nproc) hash
+RUN docker-php-ext-install -j$(nproc) dom
+RUN docker-php-ext-install -j$(nproc) fileinfo
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) gd
+
 RUN docker-php-ext-install -j$(nproc) mysqli
 RUN docker-php-ext-install -j$(nproc) pdo
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
@@ -35,15 +74,6 @@ RUN docker-php-ext-install -j$(nproc) mbstring
 RUN docker-php-ext-install -j$(nproc) soap
 RUN docker-php-ext-install -j$(nproc) xml
 RUN docker-php-ext-install -j$(nproc) opcache
-RUN docker-php-ext-install -j$(nproc) json
-RUN docker-php-ext-install -j$(nproc) filter
-RUN docker-php-ext-install -j$(nproc) hash
-RUN docker-php-ext-install -j$(nproc) curl
-RUN docker-php-ext-install -j$(nproc) dom
-RUN docker-php-ext-install -j$(nproc) fileinfo
-RUN docker-php-ext-install -j$(nproc) readline
-RUN docker-php-ext-install -j$(nproc) gettext
-RUN docker-php-ext-install -j$(nproc) date
 
 RUN docker-php-ext-configure iconv --with-iconv=/usr --with-libiconv
 
