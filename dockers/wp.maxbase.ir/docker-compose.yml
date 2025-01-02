@@ -56,7 +56,7 @@ services:
     environment:
       PMA_HOST: mariadb
     ports:
-      - "8080:80"
+      - "8082:80"
     depends_on:
       - mariadb
     networks:
@@ -66,7 +66,10 @@ services:
     image: filebrowser/filebrowser
     container_name: ${NAME}_filebrowser
     volumes:
-      - ./filebrowser.json:/config/filebrowser.json
+      - ./filebrowser.json:/filebrowser.json
+      - ./filebrowser.json:/.filebrowser.json
+      - ./filemanager-database/filebrowser.db:/config/filebrowser.db
+      - ./logs/filebrowser/filebrowser.log:/config/filebrowser.log
       - ./root:/srv
     ports:
       - "8081:80"

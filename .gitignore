@@ -1,7 +1,12 @@
 dockers/*/database/
+dockers/*/database/mariadb/
 dockers/*/root/
 dockers/*/logs/nginx/
 dockers/*/logs/nginx/error.log
 dockers/*/logs/php/
 dockers/*/logs/php/php_errors.log
 dockers/*/logs/php/php_slow.log
+dockers/*/logs/filebrowser/
+dockers/*/logs/filebrowser/filebrowser.log
+dockers/*/database/filemanager/
+dockers/*/database/filemanager/filebrowser.db
