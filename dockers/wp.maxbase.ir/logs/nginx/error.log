@@ -167,3 +167,17 @@
 2025/01/02 06:40:33 [notice] 1#1: signal 17 (SIGCHLD) received from 37
 2025/01/02 06:40:33 [notice] 1#1: worker process 37 exited with code 0
 2025/01/02 06:40:33 [notice] 1#1: exit
+2025/01/02 07:04:25 [notice] 1#1: using the "epoll" event method
+2025/01/02 07:04:25 [notice] 1#1: nginx/1.27.3
+2025/01/02 07:04:25 [notice] 1#1: built by gcc 13.2.1 20240309 (Alpine 13.2.1_git20240309) 
+2025/01/02 07:04:25 [notice] 1#1: OS: Linux 5.15.167.4-microsoft-standard-WSL2
+2025/01/02 07:04:25 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/01/02 07:04:25 [notice] 1#1: start worker processes
+2025/01/02 07:04:25 [notice] 1#1: start worker process 36
+2025/01/02 07:04:25 [notice] 1#1: start worker process 37
+2025/01/02 07:04:25 [notice] 1#1: start worker process 38
+2025/01/02 07:04:25 [notice] 1#1: start worker process 39
+2025/01/02 07:04:25 [notice] 1#1: start worker process 40
+2025/01/02 07:04:25 [notice] 1#1: start worker process 41
+2025/01/02 07:04:25 [notice] 1#1: start worker process 42
+2025/01/02 07:04:25 [notice] 1#1: start worker process 43
