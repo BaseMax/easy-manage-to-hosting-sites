@@ -7,6 +7,10 @@ RUN apk add \
 
 RUN mkdir -p /var/www/html
 
+RUN cat /etc/nginx/nginx.conf
+RUN ls -al /etc/nginx
+RUN cat /etc/nginx/http.d/default.conf
+
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip -O /tmp/phpmyadmin.zip
 RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/
 RUN rm /tmp/phpmyadmin.zip
@@ -18,4 +22,5 @@ RUN nginx -t
 
 EXPOSE 80
 
+# CMD ["sh", "-c", "ls -al /etc/nginx && cat /etc/nginx/nginx.conf"]
 CMD ["sh", "-c", "nginx -g 'daemon off;'"]
