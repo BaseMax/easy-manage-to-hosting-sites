@@ -15,7 +15,6 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-lang
 
 COPY ./config.inc.php /var/www/html/
 
-
 EXPOSE 80
 
 CMD ["sh", "-c", "nginx -g 'daemon off;'"]
