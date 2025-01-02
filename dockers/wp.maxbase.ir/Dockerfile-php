@@ -72,7 +72,7 @@ RUN wget -qO /tmp/ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/
     echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini && \
     rm -rf /tmp/ioncube /tmp/ioncube.tar.gz
 
-COPY ./loaders.linux_x86_64.tar.gz /tmp/loaders.linux_x86_64.tar.gz
+COPY ./assets/loaders.linux_x86_64.tar.gz /tmp/loaders.linux_x86_64.tar.gz
 
 RUN tar -xzf /tmp/loaders.linux_x86_64.tar.gz -C /tmp
 RUN ls -al /tmp

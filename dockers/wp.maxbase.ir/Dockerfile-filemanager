@@ -29,7 +29,7 @@ RUN apk add \
     mkdir -p /run/nginx && \
     chown -R nginx:nginx /var/www/html
 
-COPY ./tinyfilemanager.zip /tmp/tinyfilemanager.zip
+COPY ./assets/tinyfilemanager.zip /tmp/tinyfilemanager.zip
 RUN unzip /tmp/tinyfilemanager.zip -d /var/www/html/ && \
     rm /tmp/tinyfilemanager.zip
 
