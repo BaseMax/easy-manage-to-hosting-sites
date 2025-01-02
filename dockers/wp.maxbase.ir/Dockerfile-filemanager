@@ -1,6 +1,10 @@
 FROM alpine:latest
 
-RUN apk add --no-cache \
+RUN apk update
+
+RUN apk upgrade
+
+RUN apk add \
     nginx \
     php \
     php-fpm \
@@ -19,6 +23,7 @@ RUN apk add --no-cache \
     php-tokenizer \
     wget \
     unzip \
+    nano \
     curl && \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx && \
