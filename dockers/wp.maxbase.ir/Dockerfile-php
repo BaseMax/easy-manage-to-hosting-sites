@@ -1,5 +1,12 @@
 FROM php:8.1-fpm-alpine
 
+RUN rm -rf /tmp/* /usr/src/php/ext/*
+
+RUN apk --no-cache add \
+    autoconf \
+    libtool \
+    pkgconfig
+
 RUN apk --no-cache add \
     freetype-dev \
     libjpeg-turbo-dev \
@@ -43,6 +50,8 @@ RUN apk --no-cache add \
     && docker-php-ext-enable xdebug redis \
     && apk del curl wget git bash nano
 
+RUN ls /usr/src/php/ext/opcache/modules/
+ 
 RUN wget -qO /tmp/ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz && \
     tar -xzf /tmp/ioncube.tar.gz -C /tmp && \
     mv /tmp/ioncube/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ && \

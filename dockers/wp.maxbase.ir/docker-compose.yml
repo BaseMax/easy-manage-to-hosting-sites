@@ -62,6 +62,20 @@ services:
     networks:
       - wp_network
 
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: ${NAME}_filebrowser
+    volumes:
+      - ./filebrowser.json:/config/filebrowser.json
+      - ./root:/srv
+    ports:
+      - "8081:80"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    networks:
+      - wp_network
+
 networks:
   wp_network:
     driver: bridge

@@ -1,0 +1,24 @@
+{
+    "address": "0.0.0.0",
+    "port": 80,
+    "root": "/srv",
+    "database": "/config/database.db",
+    "log": "/config/filebrowser.log",
+    "auth_method": "basic",
+    "auth_username": "adminadmin$",
+    "auth_password": "adminadmin$",
+    "theme": "light",
+    "branding": {
+        "title": "My Filebrowser",
+        "icon": "/img/logo.png"
+    },
+    "allow_commands": true,
+    "allow_new_users": false,
+    "allow_register": false,
+    "max_upload_size": 10485760,
+    "disable_internal_server_error_page": false,
+    "ssl_certificate": "/config/ssl/cert.pem",
+    "ssl_key": "/config/ssl/key.pem",
+    "block_external_domains": false,
+    "dark_mode": false
+}
