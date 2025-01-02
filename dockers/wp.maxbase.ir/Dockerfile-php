@@ -4,7 +4,7 @@ RUN apk update
 
 RUN apk upgrade
 
-RUN apk add --no-cache \
+RUN apk add \
     gcc \
     g++ \
     cmake \
@@ -40,7 +40,8 @@ RUN apk add --no-cache \
     ncurses-dev \
     ncurses \
     gettext-dev \
-    gettext
+    gettext \
+    libc6-compat
 
 RUN docker-php-ext-install -j$(nproc) gettext
 RUN docker-php-ext-install -j$(nproc) curl
@@ -58,7 +59,6 @@ RUN docker-php-ext-install -j$(nproc) mbstring
 RUN docker-php-ext-install -j$(nproc) soap
 RUN docker-php-ext-install -j$(nproc) xml
 RUN docker-php-ext-install -j$(nproc) opcache
-RUN docker-php-ext-configure iconv --with-iconv=/usr --with-libiconv
 
 RUN pecl install xdebug redis
 
