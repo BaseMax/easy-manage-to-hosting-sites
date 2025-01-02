@@ -1,6 +1,6 @@
 <?php
-
-/*
+//Default Configuration
+$CONFIG = '{"lang":"en","error_reporting":true,"show_hidden":true,"hide_Cols":false,"theme":"light"}';
 #################################################################################################################
 This is an OPTIONAL configuration file. rename this file into config.php to use this configuration 
 The role of this file is to make updating of "tinyfilemanager.php" easier.
