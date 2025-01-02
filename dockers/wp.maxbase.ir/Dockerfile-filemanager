@@ -3,7 +3,8 @@ FROM alpine:latest
 RUN apk add \
     nginx \
     wget \
-    unzip
+    unzip \
+    curl
 
 RUN mkdir -p /var/www/html
 

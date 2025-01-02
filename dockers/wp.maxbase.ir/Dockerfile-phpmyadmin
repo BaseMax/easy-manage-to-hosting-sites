@@ -3,7 +3,8 @@ FROM alpine:latest
 RUN apk add \
     nginx \
     wget \
-    unzip
+    unzip \
+    curl
 
 RUN mkdir -p /var/www/html
 
@@ -16,11 +17,10 @@ RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/
 RUN rm /tmp/phpmyadmin.zip
 RUN rm -rf /var/www/html/phpMyAdmin-5.2.1-all-languages
 
-COPY ./config.inc.php /var/www/html/
+COPY ./config.inc.php /var/www/html/config.inc.php
 
 RUN nginx -t
 
 EXPOSE 80
 
-# CMD ["sh", "-c", "ls -al /etc/nginx && cat /etc/nginx/nginx.conf"]
 CMD ["sh", "-c", "nginx -g 'daemon off;'"]
