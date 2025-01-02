@@ -43,6 +43,11 @@ RUN apk add \
     gettext \
     libc6-compat
 
+RUN apk add --update linux-headers
+RUN pecl install xdebug redis
+
+RUN docker-php-ext-enable xdebug redis
+
 RUN docker-php-ext-install -j$(nproc) gettext
 RUN docker-php-ext-install -j$(nproc) curl
 RUN docker-php-ext-install -j$(nproc) filter
@@ -60,21 +65,27 @@ RUN docker-php-ext-install -j$(nproc) soap
 RUN docker-php-ext-install -j$(nproc) xml
 RUN docker-php-ext-install -j$(nproc) opcache
 
-RUN pecl install xdebug redis
-
-RUN docker-php-ext-enable xdebug redis
-
 RUN wget -qO /tmp/ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz && \
     tar -xzf /tmp/ioncube.tar.gz -C /tmp && \
     mv /tmp/ioncube/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ && \
     echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini && \
     rm -rf /tmp/ioncube /tmp/ioncube.tar.gz
 
-RUN wget -qO /tmp/sourceguardian.tar.gz https://www.sourceguardian.com/sourceguardian-php-8.1.tar.gz && \
-    tar -xzf /tmp/sourceguardian.tar.gz -C /tmp && \
-    mv /tmp/sourceguardian/extension/sourceguardian.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ && \
-    echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/sourceguardian.so" > /usr/local/etc/php/conf.d/00-sourceguardian.ini && \
-    rm -rf /tmp/sourceguardian /tmp/sourceguardian.tar.gz
+COPY ./loaders.linux_x86_64.tar.gz /tmp/loaders.linux_x86_64.tar.gz
+
+# RUN wget -qO /tmp/loaders.linux_x86_64.tar.gz https://www.sourceguardian.com/loaders/download/loaders.linux_x86_64.tar.gz && \
+# RUN wget -qO /tmp/loaders.linux_x86_64.tar.gz http://hc1.checker.in/file2link/documents/file_430978.gz/loaders.linux_x86_64.tar.gz && \
+
+RUN tar -xzf /tmp/loaders.linux_x86_64.tar.gz -C /tmp
+RUN ls -al /tmp
+RUN mv /tmp/ixed.8.1.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+RUN mv /tmp/ixed.8.1ts.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+# RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1ts.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
+RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
+
+RUN apk add shadow
+RUN useradd -m -u 1000 phpuser
 
 RUN chown -R phpuser:phpuser /usr/local/lib/php/extensions
 
@@ -82,7 +93,7 @@ COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN useradd -m -u 1000 phpuser && chown -R phpuser:phpuser /var/www/html
+RUN chown -R phpuser:phpuser /var/www/html
 
 RUN php -v
 WORKDIR /var/www/html
