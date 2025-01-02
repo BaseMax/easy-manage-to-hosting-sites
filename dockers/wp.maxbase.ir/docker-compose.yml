@@ -56,6 +56,7 @@ services:
       dockerfile: Dockerfile-phpmyadmin
     container_name: ${NAME}_phpmyadmin
     volumes:
+      - :./phpmyadmin/:/var/www/html/tmp/
       - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf
     ports:
       - "8081:80"
