@@ -34,7 +34,7 @@ services:
     image: mariadb
     container_name: ${NAME}_db
     volumes:
-      - ./database:/var/lib/mysql
+      - ./database/mariadb:/var/lib/mysql
       - ./my.cnf:/etc/mysql/my.cnf
     environment:
       MARIADB_DATABASE: ${MARIADB_DATABASE}
@@ -53,6 +53,10 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:fpm-alpine
     container_name: ${NAME}_phpmyadmin
+    volumes:
+      # https://github.com/phpmyadmin/phpmyadmin/blob/master/config.sample.inc.php
+      - ./nginx-phpmyadmin.conf:/etc/nginx/conf.d/default.conf
+      - ./config.inc.php:/etc/phpmyadmin/config.inc.php
     environment:
       PMA_HOST: mariadb
     ports:
@@ -68,7 +72,7 @@ services:
     volumes:
       - ./filebrowser.json:/filebrowser.json
       - ./filebrowser.json:/.filebrowser.json
-      - ./filemanager-database/filebrowser.db:/config/filebrowser.db
+      - ./database/filemanager/filebrowser.db:/config/filebrowser.db
       - ./logs/filebrowser/filebrowser.log:/config/filebrowser.log
       - ./root:/srv
     ports:
