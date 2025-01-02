@@ -84,7 +84,7 @@ RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
 RUN apk add shadow
 RUN useradd -m -u 1000 phpuser
 
-COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
+COPY ./config/php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
