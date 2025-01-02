@@ -1,0 +1,18 @@
+FROM alpine:latest
+
+RUN apk add \
+    nginx \
+    wget \
+    unzip \
+    && rm -rf /var/cache/apk/*
+
+RUN mkdir -p /var/www/html
+
+RUN wget https://github.com/prasathmani/tinyfilemanager/archive/refs/heads/master.zip -O /tmp/tinyfilemanager.zip && \
+    unzip /tmp/tinyfilemanager.zip -d /var/www/html/ && \
+    rm /tmp/tinyfilemanager.zip && \
+    rm -rf /var/www/html/tinyfilemanager-master
+
+EXPOSE 80
+
+CMD ["sh", "-c", "nginx -g 'daemon off;'"]

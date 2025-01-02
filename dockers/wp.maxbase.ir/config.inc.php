@@ -1,7 +1,15 @@
 <?php
 $cfg['blowfish_secret'] = 'abmkDJIFGJI345JIOjiofgm>,.4345ji';
 
-$cfg['Servers'][1]['host'] = 'mariadb';
-$cfg['Servers'][1]['port'] = '3306';
+$i = 0;
+$i++;
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+$cfg['Servers'][$i]['host'] = 'mariadb';
+$cfg['Servers'][$i]['port'] = '3306';
+$cfg['Servers'][$i]['user'] = 'root';
+$cfg['Servers'][$i]['password'] = getenv('MARIADB_ROOT_PASSWORD');
+$cfg['Servers'][$i]['compress'] = false;
+$cfg['Servers'][$i]['AllowNoPassword'] = false;
 
-$cfg['Servers'][1]['auth_type'] = 'cookie';
+$cfg['UploadDir'] = '';
+$cfg['SaveDir'] = '';
