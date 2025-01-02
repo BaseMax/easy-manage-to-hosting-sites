@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile-php
     container_name: ${NAME}_php
     volumes:
-      - ./php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ./root:/var/www/html
       - ./logs/php:/var/log/php
     environment:
@@ -35,7 +35,7 @@ services:
     container_name: ${NAME}_db
     volumes:
       - ./database/mariadb:/var/lib/mysql
-      - ./my.cnf:/etc/mysql/my.cnf
+      - ./config/mariadb.cnf:/etc/mysql/my.cnf
     environment:
       MARIADB_DATABASE: ${MARIADB_DATABASE}
       MARIADB_USER: ${MARIADB_USER}
@@ -71,7 +71,7 @@ services:
       dockerfile: Dockerfile-filemanager
     container_name: ${NAME}_filemanager
     volumes:
-      - ./config-filemanager.php:/var/www/html/config.php
+      - ./config/filemanager.php:/var/www/html/config.php
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf
       - ./root:/var/www/html/root/
     ports:
