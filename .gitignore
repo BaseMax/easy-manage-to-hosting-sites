@@ -13,3 +13,5 @@ dockers/*/database/filemanager/
 dockers/*/database/filemanager/filebrowser.db
 dockers/*/database/phpmyadmin/
 dockers/*/database/phpmyadmin/*
+dockers/*/database/phpmyadmin/twig
+dockers/*/database/phpmyadmin/twig/*
