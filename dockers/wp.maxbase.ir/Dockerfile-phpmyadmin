@@ -3,17 +3,18 @@ FROM alpine:latest
 RUN apk add \
     nginx \
     wget \
-    unzip \
-    && rm -rf /var/cache/apk/*
+    unzip
 
 RUN mkdir -p /var/www/html
 
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip -O /tmp/phpmyadmin.zip && \
-    unzip /tmp/phpmyadmin.zip -d /var/www/html/ && \
-    rm /tmp/phpmyadmin.zip && \
-    rm -rf /var/www/html/phpMyAdmin-5.2.1-all-languages
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip -O /tmp/phpmyadmin.zip
+RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/
+RUN rm /tmp/phpmyadmin.zip
+RUN rm -rf /var/www/html/phpMyAdmin-5.2.1-all-languages
 
 COPY ./config.inc.php /var/www/html/
+
+RUN nginx -t
 
 EXPOSE 80
 
