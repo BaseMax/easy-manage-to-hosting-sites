@@ -14,7 +14,9 @@ RUN apk --no-cache add \
     icu-dev \
     libsodium \
     oniguruma-dev \
+    gnu-libiconv \
     gnu-libiconv-dev \
+    build-base \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         gd \
@@ -27,7 +29,6 @@ RUN apk --no-cache add \
         soap \
         xml \
         opcache \
-        iconv \
         json \
         filter \
         hash \
@@ -37,6 +38,7 @@ RUN apk --no-cache add \
         readline \
         gettext \
         date \
+    && docker-php-ext-configure iconv --with-iconv=/usr --with-libiconv \
     && pecl install xdebug redis \
     && docker-php-ext-enable xdebug redis \
     && apk del curl wget git bash nano
@@ -53,12 +55,15 @@ RUN wget -qO /tmp/sourceguardian.tar.gz https://www.sourceguardian.com/sourcegua
     echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/sourceguardian.so" > /usr/local/etc/php/conf.d/00-sourceguardian.ini && \
     rm -rf /tmp/sourceguardian /tmp/sourceguardian.tar.gz
 
+RUN chown -R phpuser:phpuser /usr/local/lib/php/extensions
+
 COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN useradd -m -u 1000 phpuser && chown -R phpuser:phpuser /var/www/html
 
+RUN php -v
 WORKDIR /var/www/html
 
 EXPOSE 9000

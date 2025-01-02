@@ -31,7 +31,7 @@ services:
       - wp_network
 
   mariadb:
-    image: mariadb:alpine
+    image: mariadb
     container_name: ${NAME}_db
     volumes:
       - ./database:/var/lib/mysql
