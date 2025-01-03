@@ -1,0 +1,17 @@
+database/
+database/mariadb/
+database/mariadb/*
+root/
+logs/nginx/
+logs/nginx/error.log
+logs/php/
+logs/php/php_errors.log
+logs/php/php_slow.log
+logs/filebrowser/
+logs/filebrowser/filebrowser.log
+database/filemanager/
+database/filemanager/filebrowser.db
+database/phpmyadmin/
+database/phpmyadmin/*
+database/phpmyadmin/twig
+database/phpmyadmin/twig/*

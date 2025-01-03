@@ -1,0 +1,50 @@
+FROM alpine:latest
+
+RUN apk update
+
+RUN apk upgrade
+
+RUN apk add \
+    nginx \
+    php \
+    php-fpm \
+    php-mysqli \
+    php-json \
+    php-openssl \
+    php-curl \
+    php-zlib \
+    php-phar \
+    php-mbstring \
+    php-session \
+    php-iconv \
+    php-dom \
+    php-ctype \
+    php-fileinfo \
+    php-tokenizer \
+    wget \
+    unzip \
+    nano \
+    curl && \
+    mkdir -p /var/www/html && \
+    mkdir -p /run/nginx
+
+COPY ./config/php.ini /etc/php83/php.ini
+
+COPY ./assets/tinyfilemanager.zip /tmp/tinyfilemanager.zip
+RUN unzip /tmp/tinyfilemanager.zip -d /var/www/html/ && \
+    rm /tmp/tinyfilemanager.zip
+
+COPY ./config/filemanager.php /var/www/html/config.php
+
+COPY ./.env /tmp/.env
+RUN grep '^FILEMANAGER_' /tmp/.env > /var/www/html/.env && rm /tmp/.env
+
+COPY ./config/filemanager-sync.php /tmp/temp.php
+
+RUN php /tmp/temp.php && \
+    chown -R nginx:nginx /var/www/html/.env /var/www/html/config.php /var/www/html/index.php /var/www/html/translation.json && \
+    rm /tmp/temp.php
+
+EXPOSE 80
+
+CMD ["sh", "-c", "php-fpm83 && nginx -g 'daemon off;'"]

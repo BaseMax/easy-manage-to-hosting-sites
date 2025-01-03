@@ -1,0 +1,87 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: ${NAME}_nginx
+    volumes:
+      - ./nginx/site.conf:/etc/nginx/templates/default.conf.template
+      - ./logs/nginx:/var/log/nginx
+      - ./root:/var/www/html
+    environment:
+      - NGINX_HOST=${DOMAIN_NAME}
+    ports:
+      - "${PORT_HTTP}:80"
+      - "${PORT_HTTPS}:80"
+    depends_on:
+      - php-fpm
+    networks:
+      - my_network
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    container_name: ${NAME}_php
+    volumes:
+      - ./root:/var/www/html
+      - ./logs/php:/var/log/php
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker"
+    networks:
+      - my_network
+
+  mariadb:
+    image: mariadb
+    container_name: ${NAME}_db
+    volumes:
+      - ./database/mariadb:/var/lib/mysql
+      - ./config/mariadb.cnf:/etc/mysql/my.cnf
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    networks:
+      - my_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  phpmyadmin:
+    build:
+      context: .
+      dockerfile: Dockerfile-phpmyadmin
+    container_name: ${NAME}_phpmyadmin
+    volumes:
+      - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf
+      - ./database/phpmyadmin/:/var/www/html/tmp/
+    ports:
+      - "${PORT_PHPMYADMIN}:80"
+    depends_on:
+      - mariadb
+    networks:
+      - my_network
+
+  filebrowser:
+    build:
+      context: .
+      dockerfile: Dockerfile-filemanager
+    container_name: ${NAME}_filemanager
+    volumes:
+      - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf
+      - ./root:/var/www/html/root/
+    ports:
+      - "${PORT_FILEMANAGER}:80"
+    depends_on:
+      - mariadb
+    environment:
+      FILEMANAGER_USERNAME: ${FILEMANAGER_USERNAME}
+      FILEMANAGER_PASSWORD: ${FILEMANAGER_PASSWORD}
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
