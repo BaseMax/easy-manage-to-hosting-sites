@@ -4,7 +4,7 @@ $CONFIG = '{"lang":"en","error_reporting":true,"show_hidden":true,"hide_Cols":fa
 $use_auth = true;
 
 $auth_users = [
-    'admin' => '$2y$10$/K.hjNr84lLNDt8fTXjoI.DBp6PpeyoJ.mGwrrLuCZfAwfSAGqhOW', //admin@123
+    getenv('FILEMANAGER_USERNAME') => password_hash(getenv('FILEMANAGER_PASSWORD'), PASSWORD_BCRYPT),
 ];
 
 $readonly_users = [];
