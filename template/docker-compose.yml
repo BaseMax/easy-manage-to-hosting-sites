@@ -4,8 +4,8 @@ services:
     container_name: ${NAME}_nginx
     volumes:
       - ./nginx/site.conf:/etc/nginx/templates/default.conf.template
-      - ./logs/nginx:/var/log/nginx
-      - ./root:/var/www/html
+      - ${VOLUME_PREFIX}/logs/nginx:/var/log/nginx
+      - ${VOLUME_PREFIX}/root:/var/www/html
     environment:
       - NGINX_HOST=${DOMAIN_NAME}
     ports:
@@ -22,8 +22,8 @@ services:
       dockerfile: Dockerfile-php
     container_name: ${NAME}_php
     volumes:
-      - ./root:/var/www/html
-      - ./logs/php:/var/log/php
+      - ${VOLUME_PREFIX}/root:/var/www/html
+      - ${VOLUME_PREFIX}/logs/php:/var/log/php
     environment:
       PHP_IDE_CONFIG: "serverName=docker"
     networks:
@@ -33,7 +33,7 @@ services:
     image: mariadb
     container_name: ${NAME}_db
     volumes:
-      - ./database/mariadb:/var/lib/mysql
+      - ${VOLUME_PREFIX}/database/mariadb:/var/lib/mysql
       - ./config/mariadb.cnf:/etc/mysql/my.cnf
     environment:
       MARIADB_DATABASE: ${MARIADB_DATABASE}
@@ -56,7 +56,7 @@ services:
     container_name: ${NAME}_phpmyadmin
     volumes:
       - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf
-      - ./database/phpmyadmin/:/var/www/html/tmp/
+      - ${VOLUME_PREFIX}/database/phpmyadmin/:/var/www/html/tmp/
     ports:
       - "${PORT_PHPMYADMIN}:80"
     depends_on:
@@ -71,7 +71,7 @@ services:
     container_name: ${NAME}_filemanager
     volumes:
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf
-      - ./root:/var/www/html/root/
+      - ${VOLUME_PREFIX}/root:/var/www/html/root/
     ports:
       - "${PORT_FILEMANAGER}:80"
     depends_on:

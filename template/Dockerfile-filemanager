@@ -36,8 +36,11 @@ RUN unzip /tmp/tinyfilemanager.zip -d /var/www/html/ && \
 
 COPY ./config/filemanager.php /var/www/html/config.php
 
-COPY ./.env /tmp/.env
-RUN grep '^FILEMANAGER_' /tmp/.env > /var/www/html/.env && rm /tmp/.env
+ARG FILEMANAGER_USERNAME
+ARG FILEMANAGER_PASSWORD
+
+RUN echo "FILEMANAGER_USERNAME=${FILEMANAGER_USERNAME}" >> /var/www/html/.env && \
+    echo "FILEMANAGER_PASSWORD=${FILEMANAGER_PASSWORD}" >> /var/www/html/.env
 
 COPY ./config/filemanager-sync.php /tmp/temp.php
 
