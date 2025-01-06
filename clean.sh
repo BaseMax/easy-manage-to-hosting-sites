@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Stop and remove all running containers
+cd template/
 docker-compose down
 
 # Stop and remove all containers
