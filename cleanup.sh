@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Stop and remove containers if there are any
-if [ $(docker ps -q) ]; then
+if [ "$(docker ps -q)" ]; then
   docker stop $(docker ps -q)
 fi
 
-if [ $(docker ps -aq) ]; then
+if [ "$(docker ps -aq)" ]; then
   docker rm $(docker ps -aq)
 fi
 
 # Remove images if there are any
-if [ $(docker images -q) ]; then
+if [ "$(docker images -q)" ]; then
   docker rmi $(docker images -q)
 fi
 
