@@ -73,10 +73,13 @@ services:
       dockerfile: Dockerfile-filemanager
     container_name: ${NAME}_filemanager
     volumes:
+      - ./assets/tinyfilemanager.php:/var/www/html/index.php
+      - ./assets/tinyfilemanager-translation.json:/var/www/html/translation.json
       - ./config/filemanager.php:/var/www/html/config.php
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf
       - ${VOLUME_PREFIX}/root:/var/www/html/root/
       - ${VOLUME_PREFIX}/logs/filemanager:/var/log/php
+      - ${VOLUME_PREFIX}/.env:/var/www/html/.env:ro
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
       - "${PORT_FILEMANAGER}:80"
