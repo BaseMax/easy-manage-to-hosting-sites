@@ -57,7 +57,7 @@ services:
     container_name: ${NAME}_phpmyadmin
     volumes:
       - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf
-      - ${VOLUME_PREFIX}/database/phpmyadmin/:/var/www/html/tmp/
+      - ${VOLUME_PREFIX}/database/phpmyadmin:/var/www/html/tmp/
       - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
