@@ -21,7 +21,7 @@ if (!isset($env['FILEMANAGER_USERNAME']) || !isset($env['FILEMANAGER_PASSWORD'])
 
 $username = $env['FILEMANAGER_USERNAME'];
 $password = password_hash($env['FILEMANAGER_PASSWORD'], PASSWORD_DEFAULT);
-$path = $env['FILEMANAGER_PATH'];
+$path = $env['FILEMANAGER_PATH'] ?? "localhost";
 
 $username = str_replace('\'', '\\\'', $username);
 $password = str_replace('\'', '\\\'', $password);
