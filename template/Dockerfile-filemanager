@@ -33,12 +33,13 @@ COPY ./assets/tinyfilemanager-translation.json /var/www/html/translation.json
 
 ARG FILEMANAGER_USERNAME
 ARG FILEMANAGER_PASSWORD
+ARG FILEMANAGER_PATH
 
 RUN echo "FILEMANAGER_USERNAME=${FILEMANAGER_USERNAME}" >> /var/www/html/.env && \
     echo "FILEMANAGER_PASSWORD=${FILEMANAGER_PASSWORD}" >> /var/www/html/.env && \
     echo "FILEMANAGER_PATH=${FILEMANAGER_PATH}" >> /var/www/html/.env
 
-RUN chown -R nginx:nginx /var/www/html/.env /var/www/html/config.php /var/www/html/index.php /var/www/html/translation.json && \
+RUN chown -R nginx:nginx /var/www/html/.env /var/www/html/index.php /var/www/html/translation.json && \
 
 EXPOSE 80
 
