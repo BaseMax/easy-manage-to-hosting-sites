@@ -58,6 +58,7 @@ services:
     volumes:
       - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf
       - ${VOLUME_PREFIX}/database/phpmyadmin:/var/www/html/tmp/
+      - ./config/phpmyadmin.php:/var/www/html/config.inc.php
       - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
