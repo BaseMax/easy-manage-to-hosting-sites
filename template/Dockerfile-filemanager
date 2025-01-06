@@ -1,10 +1,8 @@
-FROM alpine:latest
+FROM alpine:latest 
 
-RUN apk update
-
-RUN apk upgrade
-
-RUN apk add \
+RUN apk update \
+  && apk upgrade \
+  && apk add \
     nginx \
     php \
     php-fpm \
@@ -24,9 +22,9 @@ RUN apk add \
     wget \
     unzip \
     nano \
-    curl && \
-    mkdir -p /var/www/html && \
-    mkdir -p /run/nginx
+    curl \
+  && mkdir -p /var/www/html \
+  && mkdir -p /run/nginx
 
 COPY ./assets/tinyfilemanager.php /var/www/html/index.php
 COPY ./assets/tinyfilemanager-translation.json /var/www/html/translation.json
@@ -35,11 +33,10 @@ ARG FILEMANAGER_USERNAME
 ARG FILEMANAGER_PASSWORD
 ARG FILEMANAGER_PATH
 
-RUN echo "FILEMANAGER_USERNAME=${FILEMANAGER_USERNAME}" >> /var/www/html/.env && \
-    echo "FILEMANAGER_PASSWORD=${FILEMANAGER_PASSWORD}" >> /var/www/html/.env && \
-    echo "FILEMANAGER_PATH=${FILEMANAGER_PATH}" >> /var/www/html/.env
-
-RUN chown -R nginx:nginx /var/www/html/.env /var/www/html/index.php /var/www/html/translation.json
+RUN echo "FILEMANAGER_USERNAME=${FILEMANAGER_USERNAME}" >> /var/www/html/.env \
+  && echo "FILEMANAGER_PASSWORD=${FILEMANAGER_PASSWORD}" >> /var/www/html/.env \
+  && echo "FILEMANAGER_PATH=${FILEMANAGER_PATH}" >> /var/www/html/.env \
+  && chown -R nginx:nginx /var/www/html/.env /var/www/html/index.php /var/www/html/translation.json
 
 EXPOSE 80
 
