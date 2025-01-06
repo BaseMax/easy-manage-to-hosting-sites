@@ -1,57 +1,43 @@
 import os
-import glob
+import traceback
 import subprocess
 
-
-BASE_DIR = "dockers"
-TEMPLATE_DIR = "template"
-
-
-def execute_command(command, working_dir):
-    """Executes a shell command in a specified working directory."""
+def run_command(command, cwd=None):
     try:
-        print(f"Running command: {' '.join(command)} in {working_dir}")
-        subprocess.run(command, cwd=working_dir, check=True)
+        print(f"Running command: {' '.join(command)} in {cwd or os.getcwd()}")
+        result = subprocess.run(command, cwd=cwd, check=True, text=True, capture_output=True)
+        print(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error executing command: {e}")
+        print(e.stderr)
+    except Exception as ex:
+        print(f"Unexpected error: {ex}")
+        traceback.print_exc()
 
+def process_env_file(env_file_path, template_dir):
+    env_file_relative = os.path.join("..", env_file_path.replace("\\", "/"))
+    commands = [
+        ["docker-compose", "--env-file", env_file_relative, "down", "--volumes"],
+        ["docker-compose", "--env-file", env_file_relative, "build", "--no-cache"],
+        ["docker-compose", "--env-file", env_file_relative, "up", "-d"]
+    ]
+    for command in commands:
+        run_command(command, cwd=template_dir)
 
-def process_subdirectories():
-    """Iterates through subdirectories in BASE_DIR and runs docker-compose commands."""
-    subdirs = glob.glob(os.path.join(BASE_DIR, "*"))
+def main():
+    print("Starting the Docker Compose refresh process...")
+    template_dir = os.path.join(os.getcwd(), "template")
+    dockers_path = os.path.join(os.getcwd(), "dockers")
 
-    for subdir in subdirs:
-        env_file = os.path.join(subdir, ".env")
-
-        if os.path.isfile(env_file):
-            print(f"Found .env file in {subdir}")
-
-            execute_command(
-                ["docker-compose", "--env-file", env_file, "down", "--volumes"],
-                TEMPLATE_DIR,
-            )
-
-            execute_command(
-                ["docker-compose", "--env-file", env_file, "build", "--no-cache"],
-                TEMPLATE_DIR,
-            )
-
-            execute_command(
-                ["docker-compose", "--env-file", env_file, "up", "-d"], TEMPLATE_DIR
-            )
+    for subdir in os.listdir(dockers_path):
+        env_file_path = os.path.join("dockers", subdir, ".env")
+        if os.path.isfile(env_file_path):
+            print(f"Found .env file in {env_file_path}")
+            process_env_file(env_file_path, template_dir)
         else:
-            print(f"No .env file found in {subdir}, skipping...")
+            print(f"No .env file found in {env_file_path}")
 
+    print("Process completed.")
 
 if __name__ == "__main__":
-    if not os.path.isdir(BASE_DIR):
-        print(f"Base directory '{BASE_DIR}' does not exist. Exiting...")
-        exit(1)
-
-    if not os.path.isdir(TEMPLATE_DIR):
-        print(f"Template directory '{TEMPLATE_DIR}' does not exist. Exiting...")
-        exit(1)
-
-    print("Starting the Docker Compose refresh process...")
-    process_subdirectories()
-    print("Process completed.")
+    main()
