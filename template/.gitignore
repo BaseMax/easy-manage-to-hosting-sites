@@ -7,10 +7,8 @@ logs/nginx/error.log
 logs/php/
 logs/php/php_errors.log
 logs/php/php_slow.log
-logs/filebrowser/
-logs/filebrowser/filebrowser.log
 database/filemanager/
-database/filemanager/filebrowser.db
+database/filemanager/*
 database/phpmyadmin/
 database/phpmyadmin/*
 database/phpmyadmin/twig

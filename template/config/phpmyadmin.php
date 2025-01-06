@@ -13,3 +13,5 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
 
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
+$cfg['MaxFileSize'] = '640M';
+$cfg['MemoryLimit'] = '1024M';

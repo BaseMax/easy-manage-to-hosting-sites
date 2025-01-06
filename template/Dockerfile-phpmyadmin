@@ -35,6 +35,9 @@ RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/ && \
     rm /tmp/phpmyadmin.zip
 
 COPY ./config/phpmyadmin.php /var/www/html/config.inc.php
+
+RUN echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+
 RUN chown -R nginx:nginx /var/www/html
 
 RUN rm /etc/nginx/http.d/default.conf
