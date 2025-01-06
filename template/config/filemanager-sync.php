@@ -21,9 +21,11 @@ if (!isset($env['FILEMANAGER_USERNAME']) || !isset($env['FILEMANAGER_PASSWORD'])
 
 $username = $env['FILEMANAGER_USERNAME'];
 $password = password_hash($env['FILEMANAGER_PASSWORD'], PASSWORD_DEFAULT);
+$path = $env['FILEMANAGER_PATH'];
 
 $username = str_replace('\'', '\\\'', $username);
 $password = str_replace('\'', '\\\'', $password);
+$path = str_replace('\'', '\\\'', $path);
 
 $targetFile = '/var/www/html/config.php';
 if (!file_exists($targetFile)) {
@@ -37,6 +39,7 @@ if ($fileContents === false) {
 
 $fileContents = str_replace('{FILEMANAGER_USERNAME}', $username, $fileContents);
 $fileContents = str_replace('{FILEMANAGER_PASSWORD}', $password, $fileContents);
+$fileContents = str_replace('{FILEMANAGER_PATH}', $path, $fileContents);
 
 if (file_put_contents($targetFile, $fileContents) === false) {
     exit('Error: Unable to write to the target PHP file.');

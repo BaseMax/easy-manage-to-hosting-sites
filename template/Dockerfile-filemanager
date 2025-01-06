@@ -28,9 +28,8 @@ RUN apk add \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx
 
-COPY ./assets/tinyfilemanager.zip /tmp/tinyfilemanager.zip
-RUN unzip /tmp/tinyfilemanager.zip -d /var/www/html/ && \
-    rm /tmp/tinyfilemanager.zip
+COPY ./assets/tinyfilemanager.php /var/www/html/index.php
+COPY ./assets/tinyfilemanager-translation.json /var/www/html/translation.json
 
 COPY ./config/filemanager.php /var/www/html/config.php
 

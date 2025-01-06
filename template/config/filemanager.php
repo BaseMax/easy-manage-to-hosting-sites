@@ -21,7 +21,7 @@ $root_path = '/var/www/html/root/';
 
 $root_url = '';
 
-$http_host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$http_host = '{FILEMANAGER_PATH}';
 
 $directories_users = [];
 
