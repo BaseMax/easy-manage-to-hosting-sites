@@ -37,6 +37,9 @@ RUN chown -R nginx:nginx /var/www/html && \
     find /var/www/html -type f -exec chmod 644 {} \; && \
     find /var/www/html -type f -exec chmod +x {} \;
 
+RUN chown -R nginx:nginx /var/www/html/tmp && \
+    chmod 755 /var/www/html/tmp
+
 EXPOSE 80
 
 CMD ["sh", "-c", "php-fpm83 && nginx -g 'daemon off;'"]
