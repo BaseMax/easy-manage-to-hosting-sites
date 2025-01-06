@@ -37,7 +37,8 @@ RUN chown -R nginx:nginx /var/www/html && \
     find /var/www/html -type f -exec chmod 644 {} \; && \
     find /var/www/html -type f -exec chmod +x {} \;
 
-RUN chown -R nginx:nginx /var/www/html/tmp && \
+RUN mkdir -p /var/www/html/tmp && \
+    chown -R nginx:nginx /var/www/html/tmp && \
     chmod 755 /var/www/html/tmp
 
 EXPOSE 80
