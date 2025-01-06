@@ -16,13 +16,16 @@ def run_command(command, cwd=None):
 
 def process_env_file(env_file_path, template_dir):
     env_file_relative = os.path.join("..", env_file_path.replace("\\", "/"))
+    docker_compose_relative = os.path.join(template_dir, "docker-compose.yml")
+
     commands = [
-        ["docker-compose", "--env-file", env_file_relative, "down", "--volumes"],
-        ["docker-compose", "--env-file", env_file_relative, "build", "--no-cache"],
-        ["docker-compose", "--env-file", env_file_relative, "up", "-d"]
+        ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "down", "--volumes"],
+        ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "build", "--no-cache"],
+        ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "up", "-d"]
     ]
     for command in commands:
-        run_command(command, cwd=template_dir)
+        print(f"Running command:\n{" ".join(command)}")
+        # run_command(command, cwd=template_dir)
 
 def main():
     print("Starting the Docker Compose refresh process...")
@@ -30,7 +33,8 @@ def main():
     dockers_path = os.path.join(os.getcwd(), "dockers")
 
     for subdir in os.listdir(dockers_path):
-        env_file_path = os.path.join("dockers", subdir, ".env")
+        env_file_path = os.path.join(dockers_path, subdir, ".env")
+        
         if os.path.isfile(env_file_path):
             print(f"Found .env file in {env_file_path}")
             process_env_file(env_file_path, template_dir)

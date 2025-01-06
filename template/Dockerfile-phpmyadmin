@@ -28,7 +28,7 @@ RUN apk add \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx
 
-COPY ./config/php.ini /etc/php83/php.ini
+# COPY ./config/php.ini /etc/php83/php.ini
  
 COPY ./assets/phpmyadmin.zip /tmp/phpmyadmin.zip
 RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/ && \
@@ -36,7 +36,7 @@ RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/ && \
 
 COPY ./config/phpmyadmin.php /var/www/html/config.inc.php
 
-RUN echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+# RUN echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
 RUN chown -R nginx:nginx /var/www/html
 

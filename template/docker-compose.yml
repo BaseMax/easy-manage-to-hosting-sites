@@ -23,6 +23,7 @@ services:
     volumes:
       - ${VOLUME_PREFIX}/root:/var/www/html
       - ${VOLUME_PREFIX}/logs/php:/var/log/php
+      - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
     environment:
       PHP_IDE_CONFIG: "serverName=docker"
     networks:
@@ -57,6 +58,7 @@ services:
       - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf
       - ${VOLUME_PREFIX}/database/phpmyadmin/:/var/www/html/tmp/
       - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php
+      - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
       - "${PORT_PHPMYADMIN}:80"
     depends_on:
@@ -73,6 +75,7 @@ services:
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf
       - ${VOLUME_PREFIX}/root:/var/www/html/root/
       - ${VOLUME_PREFIX}/logs/filemanager:/var/log/php
+      - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
       - "${PORT_FILEMANAGER}:80"
     depends_on:
