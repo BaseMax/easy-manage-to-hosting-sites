@@ -25,7 +25,7 @@ def process_env_file(env_file_path, template_dir):
     ]
     for command in commands:
         print(f"Running command:\n{" ".join(command)}")
-        # run_command(command, cwd=template_dir)
+        run_command(command, cwd=template_dir)
 
 def main():
     print("Starting the Docker Compose refresh process...")
