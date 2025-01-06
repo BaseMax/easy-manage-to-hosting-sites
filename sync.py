@@ -20,7 +20,7 @@ def process_env_file(env_file_path, template_dir):
 
     commands = [
         ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "down", "--volumes"],
-        ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "build", "--no-cache"],
+        # ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "build", "--no-cache"],
         ["docker-compose", "-f", docker_compose_relative, "--env-file", env_file_relative, "up", "-d"]
     ]
     for command in commands:
