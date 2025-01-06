@@ -1,11 +1,18 @@
 #!/bin/bash
 
-# Stop and remove all containers
-docker stop $(docker ps -q)
-docker rm $(docker ps -aq)
+# Stop and remove containers if there are any
+if [ $(docker ps -q) ]; then
+  docker stop $(docker ps -q)
+fi
 
-# Remove all Docker images
-docker rmi $(docker images -q)
+if [ $(docker ps -aq) ]; then
+  docker rm $(docker ps -aq)
+fi
+
+# Remove images if there are any
+if [ $(docker images -q) ]; then
+  docker rmi $(docker images -q)
+fi
 
 # Prune unused volumes and networks
 docker volume prune -f
