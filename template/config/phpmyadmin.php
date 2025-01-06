@@ -15,3 +15,6 @@ $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
 $cfg['MaxFileSize'] = '640M';
 $cfg['MemoryLimit'] = '1024M';
+
+$cfg['ForceSSL'] = true;
+// $cfg['PmaAbsoluteUri'] = 'https://phpmyadmin.site.ir/';
