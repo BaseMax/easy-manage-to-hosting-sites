@@ -1,10 +1,37 @@
 <?php
+function loadEnv($filePath) {
+    if (!file_exists($filePath)) {
+        return false;
+    }
+
+    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    foreach ($lines as $line) {
+        if (strpos($line, '#') === 0) continue;
+
+        list($key, $value) = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value);
+
+        putenv("$key=$value");
+    }
+
+    return true;
+}
+
+$envFilePath = __DIR__ . '/.env';
+loadEnv($envFilePath);
+
+$FILEMANAGER_USERNAME = getenv('FILEMANAGER_USERNAME');
+$FILEMANAGER_PASSWORD = getenv('FILEMANAGER_PASSWORD');
+$FILEMANAGER_PATH = getenv('FILEMANAGER_PATH');
+
 $CONFIG = '{"lang":"en","error_reporting":true,"show_hidden":true,"hide_Cols":false,"theme":"light"}';
 
 $use_auth = true;
 
 $auth_users = [
-    '{FILEMANAGER_USERNAME}' => '{FILEMANAGER_PASSWORD}',
+    "$FILEMANAGER_USERNAME" => "$FILEMANAGER_PASSWORD",
 ];
 
 $readonly_users = [];
@@ -21,7 +48,11 @@ $root_path = '/var/www/html/root/';
 
 $root_url = '';
 
-$http_host = '{FILEMANAGER_PATH}';
+$http_host = $FILEMANAGER_PATH ?? 'localhost';
+
+$is_https = ($http_host !== "localhost");
+// $is_https = isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1)
+//     || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https';
 
 $directories_users = [];
 

@@ -31,19 +31,14 @@ RUN apk add \
 COPY ./assets/tinyfilemanager.php /var/www/html/index.php
 COPY ./assets/tinyfilemanager-translation.json /var/www/html/translation.json
 
-COPY ./config/filemanager.php /var/www/html/config.php
-
 ARG FILEMANAGER_USERNAME
 ARG FILEMANAGER_PASSWORD
 
 RUN echo "FILEMANAGER_USERNAME=${FILEMANAGER_USERNAME}" >> /var/www/html/.env && \
-    echo "FILEMANAGER_PASSWORD=${FILEMANAGER_PASSWORD}" >> /var/www/html/.env
+    echo "FILEMANAGER_PASSWORD=${FILEMANAGER_PASSWORD}" >> /var/www/html/.env && \
+    echo "FILEMANAGER_PATH=${FILEMANAGER_PATH}" >> /var/www/html/.env
 
-COPY ./config/filemanager-sync.php /tmp/temp.php
-
-RUN php /tmp/temp.php && \
-    chown -R nginx:nginx /var/www/html/.env /var/www/html/config.php /var/www/html/index.php /var/www/html/translation.json && \
-    rm /tmp/temp.php
+RUN chown -R nginx:nginx /var/www/html/.env /var/www/html/config.php /var/www/html/index.php /var/www/html/translation.json && \
 
 EXPOSE 80
 
