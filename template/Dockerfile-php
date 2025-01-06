@@ -83,11 +83,29 @@ RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
 
 RUN apk add shadow
 RUN useradd -m -u 1000 phpuser
+RUN usermod -a -G www-data phpuser
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN chown -R phpuser:phpuser /usr/local/lib/php/extensions
 RUN chown -R phpuser:phpuser /var/www/html
+
+RUN chown -R www-data:www-data /var/www/html/wp-content
+RUN chown -R www-data:www-data /var/www/html/wp-content/plugins
+RUN chown -R www-data:www-data /var/www/html/wp-content/uploads
+RUN chown -R www-data:www-data /var/www/html/wp-content/themes
+RUN chown -R www-data:www-data /var/www/html/wp-includes
+RUN chown -R www-data:www-data /var/www/html/wp-admin
+
+RUN find /var/www/html -type d -exec chmod 755 {} \;
+RUN find /var/www/html -type f -exec chmod 644 {} \;
+
+RUN chmod -R 775 /var/www/html/wp-content/uploads
+RUN chmod -R 775 /var/www/html/wp-content/plugins
+RUN chmod -R 775 /var/www/html/wp-content/themes
+
+RUN chown -R www-data:www-data /var/www/html/wp-content
+RUN chmod -R 775 /var/www/html/wp-content
 
 RUN php -v
 WORKDIR /var/www/html

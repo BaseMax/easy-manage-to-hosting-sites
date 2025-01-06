@@ -5,7 +5,7 @@ services:
     volumes:
       - ./nginx/site.conf:/etc/nginx/templates/default.conf.template
       - ${VOLUME_PREFIX}/logs/nginx/:/var/log/nginx/
-      - ${VOLUME_PREFIX}/root:/var/www/html
+      - ${VOLUME_PREFIX}/root/:/var/www/html/
     environment:
       - NGINX_HOST=${DOMAIN_NAME}
     ports:
