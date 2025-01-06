@@ -35,6 +35,7 @@ services:
     volumes:
       - ${VOLUME_PREFIX}/database/mariadb:/var/lib/mysql
       - ./config/mariadb.cnf:/etc/mysql/my.cnf
+      - ${VOLUME_PREFIX}/logs/mariadb:/var/log/mysql
     environment:
       MARIADB_DATABASE: ${MARIADB_DATABASE}
       MARIADB_USER: ${MARIADB_USER}

@@ -1,2 +1,5 @@
 [mysqld]
 default-time-zone = 'Asia/Tehran'
+log-error = /var/log/mysql/error.log
+slow-query-log = 1
+slow-query-log-file = /var/log/mysql/mysql-slow.log

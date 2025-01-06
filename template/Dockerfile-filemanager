@@ -28,8 +28,6 @@ RUN apk add \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx
 
-# COPY ./config/php.ini /etc/php83/php.ini
-
 COPY ./assets/tinyfilemanager.zip /tmp/tinyfilemanager.zip
 RUN unzip /tmp/tinyfilemanager.zip -d /var/www/html/ && \
     rm /tmp/tinyfilemanager.zip
@@ -47,9 +45,6 @@ COPY ./config/filemanager-sync.php /tmp/temp.php
 RUN php /tmp/temp.php && \
     chown -R nginx:nginx /var/www/html/.env /var/www/html/config.php /var/www/html/index.php /var/www/html/translation.json && \
     rm /tmp/temp.php
-
-# RUN echo "<?php phpinfo(); ?>" > /var/www/html/info.php
-# RUN chown -R nginx:nginx /var/www/html/info.php
 
 EXPOSE 80
 
