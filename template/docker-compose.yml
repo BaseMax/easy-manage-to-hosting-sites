@@ -56,7 +56,7 @@ services:
     volumes:
       - ./nginx/phpmyadmin.conf:/etc/nginx/http.d/default.conf:ro
       - ${VOLUME_PREFIX}/database/phpmyadmin:/var/www/html/tmp:rw
-      - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php:rw
+      - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php83:rw
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
       - "127.0.0.1:${PORT_PHPMYADMIN}:80"
@@ -76,7 +76,7 @@ services:
       - ./config/filemanager.php:/var/www/html/config.php:ro
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf:ro
       - ${VOLUME_PREFIX}/root:/var/www/html/root:rw
-      - ${VOLUME_PREFIX}/logs/filemanager:/var/log/php:rw
+      - ${VOLUME_PREFIX}/logs/filemanager:/var/log/php83:rw
       - ${VOLUME_PREFIX}/.env:/var/www/html/.env:ro
       - ./config/php.ini:/etc/php83/php.ini:ro
     user: "33:33"
