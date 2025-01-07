@@ -40,6 +40,7 @@ services:
       - ./assets/filemanager/index.php:/var/www/filemanager/index.php:ro
       - ./assets/filemanager/translation.json:/var/www/filemanager/translation.json:ro
       - ./config/filemanager.php:/var/www/filemanager/config.php:ro
+      - ${VOLUME_PREFIX}/.env:/var/www/filemanager/.env:ro
       - ${VOLUME_PREFIX}/root:/var/www/html:rw
       - ${VOLUME_PREFIX}/logs/php:/var/log/php:rw
       - ./config/php.ini:/usr/local/etc/php/php.ini:ro
@@ -77,7 +78,6 @@ services:
       - ./assets/filemanager/translation.json:/var/www/filemanager/translation.json:ro
       - ./config/filemanager.php:/var/www/filemanager/config.php:ro
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf:ro
-      - ${VOLUME_PREFIX}/.env:/var/www/filemanager/.env:ro
     ports:
       - "127.0.0.1:${PORT_FILEMANAGER}:80"
     depends_on:
