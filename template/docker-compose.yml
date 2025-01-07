@@ -15,20 +15,6 @@ services:
     networks:
       - my_network
 
-  php-fpm:
-    build:
-      context: .
-      dockerfile: Dockerfile-php
-    container_name: ${NAME}_php
-    volumes:
-      - ${VOLUME_PREFIX}/root:/var/www/html:rw
-      - ${VOLUME_PREFIX}/logs/php:/var/log/php:rw
-      - ./config/php.ini:/usr/local/etc/php/php.ini:ro
-    environment:
-      PHP_IDE_CONFIG: "serverName=docker"
-    networks:
-      - my_network
-
   mariadb:
     image: mariadb
     container_name: ${NAME}_db
@@ -41,6 +27,20 @@ services:
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    networks:
+      - my_network
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    container_name: ${NAME}_php
+    volumes:
+      - ${VOLUME_PREFIX}/root:/var/www/html:rw
+      - ${VOLUME_PREFIX}/logs/php:/var/log/php:rw
+      - ./config/php.ini:/usr/local/etc/php/php.ini:ro
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker"
     networks:
       - my_network
 
