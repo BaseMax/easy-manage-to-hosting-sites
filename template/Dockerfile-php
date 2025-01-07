@@ -40,29 +40,12 @@ RUN apk update --no-cache && \
     gettext-dev \
     gettext \
     libc6-compat \
-    libudev-zero
+    libudev-zero \
+    linux-headers \
+    shadow \
+    icu-data-full
 
-RUN apk add --no-cache --update linux-headers
-RUN pecl install xdebug redis
-
-RUN docker-php-ext-enable xdebug redis
-
-RUN docker-php-ext-install -j$(nproc) gettext
-RUN docker-php-ext-install -j$(nproc) curl
-RUN docker-php-ext-install -j$(nproc) filter
-RUN docker-php-ext-install -j$(nproc) dom
-RUN docker-php-ext-install -j$(nproc) fileinfo
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-RUN docker-php-ext-install -j$(nproc) gd
-RUN docker-php-ext-install -j$(nproc) mysqli
-RUN docker-php-ext-install -j$(nproc) pdo
-RUN docker-php-ext-install -j$(nproc) pdo_mysql
-RUN docker-php-ext-install -j$(nproc) zip
-RUN docker-php-ext-install -j$(nproc) intl
-RUN docker-php-ext-install -j$(nproc) mbstring
-RUN docker-php-ext-install -j$(nproc) soap
-RUN docker-php-ext-install -j$(nproc) xml
-RUN docker-php-ext-install -j$(nproc) opcache
+RUN apk add --no-cache php81-pecl-xdebug php81-pecl-redis php81-gettext php81-curl php81-dom php81-fileinfo php81-gd php81-mysqli php81-pdo php81-pdo_mysql php81-zip php81-intl php81-mbstring php81-soap php81-xml php81-opcache --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted
 
 RUN wget -qO /tmp/ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz && \
     tar -xzf /tmp/ioncube.tar.gz -C /tmp && \
@@ -71,27 +54,20 @@ RUN wget -qO /tmp/ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/
     rm -rf /tmp/ioncube /tmp/ioncube.tar.gz
 
 COPY ./assets/loaders.linux_x86_64.tar.gz /tmp/loaders.linux_x86_64.tar.gz
+RUN tar -xzf /tmp/loaders.linux_x86_64.tar.gz -C /tmp && \
+    mv /tmp/ixed.8.1.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ && \
+    mv /tmp/ixed.8.1ts.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ && \
+    echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini && \
+    rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
 
-RUN tar -xzf /tmp/loaders.linux_x86_64.tar.gz -C /tmp
-RUN ls -al /tmp
-RUN mv /tmp/ixed.8.1.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
-RUN mv /tmp/ixed.8.1ts.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
-RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
-
-RUN apk add --no-cache shadow
-RUN apk add --no-cache icu-data-full
- 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN chown -R www-data:www-data /usr/local/lib/php/extensions
 
 COPY ./config/set_permissions.sh /usr/local/bin/set_permissions.sh
-
 RUN chmod +x /usr/local/bin/set_permissions.sh
 
 WORKDIR /var/www/html
-
 EXPOSE 9000
 
 CMD ["sh", "-c", "/usr/local/bin/set_permissions.sh && php-fpm"]
