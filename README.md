@@ -20,6 +20,8 @@ If you are in rush and want to build it quickly run:
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
 or
 COMPOSE_DOCKER_CLI_BUILD=0 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
+or
+set "COMPOSE_DOCKER_CLI_BUILD=1" & set "DOCKER_BUILDKIT=1" & docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
 ```
 
 If you want to jump on bash of a container:
