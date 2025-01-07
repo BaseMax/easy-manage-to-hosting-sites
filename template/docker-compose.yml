@@ -14,7 +14,7 @@ services:
       - php-fpm
     networks:
       - my_network
-    command: sh -c "adduser -S -G www-data www-data && chown -R www-data:www-data /var/www/html && nginx -g 'daemon off;'"
+    command: sh -c "adduser -S -G www-data www-data && chown -R www-data:www-data /var/www/html"
 
   php-fpm:
     build:
