@@ -18,8 +18,10 @@ RUN apk update --no-cache && \
     php-dom \
     php-ctype \
     php-fileinfo \
+    php-gd \
     php-pdo \
     php-pdo_mysql \
+    php-intl \
     php-soap \
     php-opcache \
     php-zip \
