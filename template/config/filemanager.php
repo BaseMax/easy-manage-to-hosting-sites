@@ -27,6 +27,7 @@ function loadEnv($filePath) {
 $envFilePath = __DIR__ . '/.env';
 loadEnv($envFilePath);
 
+$DOMAIN_NAME = getenv('DOMAIN_NAME');
 $FILEMANAGER_USERNAME = getenv('FILEMANAGER_USERNAME');
 $FILEMANAGER_PASSWORD = getenv('FILEMANAGER_PASSWORD');
 $FILEMANAGER_PATH = getenv('FILEMANAGER_PATH');
@@ -53,6 +54,7 @@ $root_path = '/var/www/html/';
 
 $root_url = '';
 
+$http_serve_host = $DOMAIN_NAME ?? $FILEMANAGER_PATH ?? 'localhost';
 $http_host = $FILEMANAGER_PATH ?? 'localhost';
 
 $is_https = ($http_host !== "localhost");
