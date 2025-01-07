@@ -3,9 +3,11 @@ services:
     image: nginx:alpine
     container_name: ${NAME}_nginx
     volumes:
-      - ./nginx/site.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/site.conf:/etc/nginx/templates/default.conf.template
       - ${VOLUME_PREFIX}/logs/nginx:/var/log/nginx
       - ${VOLUME_PREFIX}/root:/var/www/html
+    environment:
+      - NGINX_HOST=${DOMAIN_NAME}
     ports:
       - "${PORT_HTTP}:80"
     depends_on:
