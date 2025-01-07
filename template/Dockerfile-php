@@ -42,7 +42,7 @@ RUN apk update --no-cache && \
     libc6-compat \
     libudev-zero
 
-RUN apk add --update linux-headers
+RUN apk add --no-cache --update linux-headers
 RUN pecl install xdebug redis
 
 RUN docker-php-ext-enable xdebug redis
@@ -80,8 +80,6 @@ RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902
 RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
 
 RUN apk add shadow
-# RUN useradd -m -u 1000 phpuser
-# RUN usermod -a -G www-data phpuser
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
