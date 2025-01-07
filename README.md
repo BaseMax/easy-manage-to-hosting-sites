@@ -44,6 +44,12 @@ or
 docker exec -it yasnachap_ir_filemanager /bin/sh
 ```
 
+If you want to watch logs of a container:
+
+```
+docker logs -f yasnachap_ir_php
+```
+
 To manage Docker containers for your sites, follow these steps:
 
 **1. Bringing Down Existing Containers**
