@@ -35,11 +35,8 @@ RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/ && \
 RUN chown -R nginx:nginx /var/www/html && \
     find /var/www/html -type d -exec chmod 755 {} \; && \
     find /var/www/html -type f -exec chmod 644 {} \; && \
-    find /var/www/html -type f -exec chmod +x {} \;
-
-RUN mkdir -p /var/www/html/tmp && \
-    chown -R nginx:nginx /var/www/html/tmp && \
-    chmod 755 /var/www/html/tmp
+    chmod 660 /var/www/html/config.inc.php && \
+    chmod 775 /var/www/html/tmp
 
 EXPOSE 80
 
