@@ -32,6 +32,7 @@ docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.e
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up -d
 or
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up --build
+docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --no-cache
 ```
 
 If you want to jump on bash of a container:
