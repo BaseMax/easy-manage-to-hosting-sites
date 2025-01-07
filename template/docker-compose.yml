@@ -43,11 +43,6 @@ services:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
     networks:
       - my_network
-    healthcheck:
-      test: ["CMD-SHELL", "mariadb -h localhost -u root -p\"$MYSQL_ROOT_PASSWORD\" -e 'SELECT 1'"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   phpmyadmin:
     build:
