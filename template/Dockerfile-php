@@ -96,4 +96,4 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 # CMD ["sh", "-c" "/usr/local/bin/set_permissions.sh & php-fpm"]
-CMD ["sh", "-c" "php-fpm"]
+CMD ["php-fpm"]
