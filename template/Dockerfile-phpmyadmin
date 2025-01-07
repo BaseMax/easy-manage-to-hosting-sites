@@ -18,10 +18,18 @@ RUN apk update --no-cache && \
     php-dom \
     php-ctype \
     php-fileinfo \
+    php-opcache \
+    php-zip \
     php-tokenizer \
     wget \
     unzip \
     nano \
+    pcre2 \
+    pcre2-dev \
+    autoconf \
+    gcc \
+    g++ \
+    make \
     curl && \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx
