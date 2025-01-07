@@ -79,7 +79,7 @@ RUN mv /tmp/ixed.8.1ts.lin /usr/local/lib/php/extensions/no-debug-non-zts-202109
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
 RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
 
-RUN apk add shadow
+RUN apk add --no-cache shadow
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

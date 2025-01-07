@@ -14,6 +14,12 @@ This will synchronize the required files and configurations as per your setup.
 
 ## Docker Setup
 
+If you are in rush and want to build it quickly run:
+
+```bash
+docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
+```
+
 To manage Docker containers for your sites, follow these steps:
 
 **1. Bringing Down Existing Containers**
