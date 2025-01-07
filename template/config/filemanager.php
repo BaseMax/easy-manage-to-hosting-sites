@@ -13,6 +13,11 @@ function loadEnv($filePath) {
         $key = trim($key);
         $value = trim($value);
 
+        if ((substr($value, 0, 1) === '"' && substr($value, -1) === '"') || 
+            (substr($value, 0, 1) === "'" && substr($value, -1) === "'")) {
+            $value = substr($value, 1, -1);
+        }
+
         putenv("$key=$value");
     }
 
