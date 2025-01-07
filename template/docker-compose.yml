@@ -29,7 +29,6 @@ services:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
     networks:
       - my_network
-    command: ["bash", "-c", "chown -R mysql:mysql /var/lib/mysql /var/log/mysql && /usr/local/bin/docker-entrypoint.sh"]
 
   php-fpm:
     build:
