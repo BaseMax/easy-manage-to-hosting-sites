@@ -43,7 +43,11 @@ RUN apk update --no-cache && \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx
 
-WORKDIR /var/www/html
+COPY ./config/set_permissions.sh /usr/local/bin/set_permissions.sh
+RUN chmod +x /usr/local/bin/set_permissions.sh
+RUN sh -c /usr/local/bin/set_permissions.sh
+
+WORKDIR /var/www
 EXPOSE 80
 
 CMD ["sh", "-c", "php-fpm83 && nginx -g 'daemon off;'"]

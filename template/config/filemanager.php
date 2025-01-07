@@ -49,7 +49,7 @@ $edit_files = true;
 
 $default_timezone = 'Asia/Tehran';
 
-$root_path = '/var/www/html/root/';
+$root_path = '/var/www/html/';
 
 $root_url = '';
 
