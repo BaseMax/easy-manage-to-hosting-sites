@@ -72,13 +72,15 @@ RUN apk update --no-cache && \
 
 RUN apk add --no-cache postfix-pcre
 
+RUN docker-php-ext-install mysqli
+
 COPY ./assets/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini
 
 COPY ./assets/ixed.8.1.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
 
-RUN echo "extension=mysqli" > /usr/local/etc/php/conf.d/mysqli.ini
+# RUN echo "extension=mysqli" > /usr/local/etc/php/conf.d/mysqli.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -93,4 +95,5 @@ RUN chmod +x /usr/local/bin/set_permissions.sh
 WORKDIR /var/www/html
 EXPOSE 9000
 
-CMD ["sh", "-c", "php-fpm & /usr/local/bin/set_permissions.sh && fg"]
+# CMD ["sh", "-c" "/usr/local/bin/set_permissions.sh & php-fpm"]
+CMD ["sh", "-c" "php-fpm"]
