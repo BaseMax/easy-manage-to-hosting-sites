@@ -7,7 +7,7 @@ services:
       - ${VOLUME_PREFIX}/logs/nginx:/var/log/nginx:rw
       - ${VOLUME_PREFIX}/database/nginx:/var/cache/nginx:rw
       - ${VOLUME_PREFIX}/root:/var/www/html:ro
-    user: "33:33"
+    # user: "33:33"
     environment:
       - NGINX_HOST=${DOMAIN_NAME}
     ports:
@@ -41,7 +41,7 @@ services:
       - ${VOLUME_PREFIX}/root:/var/www/html:rw
       - ${VOLUME_PREFIX}/logs/php:/var/log/php:rw
       - ./config/php.ini:/usr/local/etc/php/php.ini:ro
-    user: "33:33"
+    # user: "33:33"
     depends_on:
       - mariadb
     environment:
@@ -80,7 +80,7 @@ services:
       - ${VOLUME_PREFIX}/logs/filemanager:/var/log/php83:rw
       - ${VOLUME_PREFIX}/.env:/var/www/html/.env:ro
       - ./config/php.ini:/etc/php83/php.ini:ro
-    user: "33:33"
+    # user: "33:33"
     ports:
       - "127.0.0.1:${PORT_FILEMANAGER}:80"
     environment:
