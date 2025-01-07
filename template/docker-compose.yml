@@ -75,8 +75,6 @@ services:
       - ./config/filemanager.php:/var/www/filemanager/config.php:ro
       - ./nginx/filemanager.conf:/etc/nginx/http.d/default.conf:ro
       - ${VOLUME_PREFIX}/.env:/var/www/filemanager/.env:ro
-      # - ${VOLUME_PREFIX}/logs/filemanager:/var/log/php83:rw
-      # - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
       - "127.0.0.1:${PORT_FILEMANAGER}:80"
     depends_on:
