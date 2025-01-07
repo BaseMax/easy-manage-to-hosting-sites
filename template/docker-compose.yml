@@ -23,7 +23,7 @@ services:
     volumes:
       - ${VOLUME_PREFIX}/root:/var/www/html:rw
       - ${VOLUME_PREFIX}/logs/php:/var/log/php
-      - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+      - ./config/php.ini:/usr/local/etc/php/php.ini:ro
     environment:
       PHP_IDE_CONFIG: "serverName=docker"
     networks:
