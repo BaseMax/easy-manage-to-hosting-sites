@@ -11,12 +11,12 @@ services:
     ports:
       - "${PORT_HTTP}:80"
     depends_on:
-      - php-fpm
+      - php
     networks:
       - my_network
     command: sh -c "adduser -S -G www-data www-data && chown -R www-data:www-data /var/www/html"
 
-  php-fpm:
+  php:
     build:
       context: .
       dockerfile: Dockerfile-php
