@@ -5,6 +5,7 @@ services:
     volumes:
       - ./nginx/site.conf:/etc/nginx/templates/default.conf.template:ro
       - ${VOLUME_PREFIX}/logs/nginx:/var/log/nginx:rw
+      - ${VOLUME_PREFIX}/database/nginx:/var/cache/nginx:rw
       - ${VOLUME_PREFIX}/root:/var/www/html:ro
     user: "33:33"
     environment:
