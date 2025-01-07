@@ -24,6 +24,14 @@ or
 set "COMPOSE_DOCKER_CLI_BUILD=1" & set "DOCKER_BUILDKIT=1" & docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
 ```
 
+and
+
+```
+docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up
+or
+docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up --build
+```
+
 If you want to jump on bash of a container:
 
 ```bash
