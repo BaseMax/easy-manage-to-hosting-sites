@@ -23,6 +23,8 @@ RUN apk update --no-cache && \
     php-tokenizer \
     wget \
     unzip \
+    zip \
+    libzip-dev \
     nano \
     pcre2 \
     pcre2-dev \
