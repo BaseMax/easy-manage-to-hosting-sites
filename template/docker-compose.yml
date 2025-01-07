@@ -9,7 +9,7 @@ services:
     environment:
       - NGINX_HOST=${DOMAIN_NAME}
     ports:
-      - "${PORT_HTTP}:80"
+      - "127.0.0.1:${PORT_HTTP}:80"
     depends_on:
       - php-fpm
     networks:
@@ -57,7 +57,7 @@ services:
       - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php:rw
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
-      - "${PORT_PHPMYADMIN}:80"
+      - "127.0.0.1:${PORT_PHPMYADMIN}:80"
     depends_on:
       - mariadb
     networks:
@@ -78,7 +78,7 @@ services:
       - ${VOLUME_PREFIX}/.env:/var/www/html/.env:ro
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
-      - "${PORT_FILEMANAGER}:80"
+      - "127.0.0.1:${PORT_FILEMANAGER}:80"
     environment:
       FILEMANAGER_USERNAME: ${FILEMANAGER_USERNAME}
       FILEMANAGER_PASSWORD: ${FILEMANAGER_PASSWORD}
