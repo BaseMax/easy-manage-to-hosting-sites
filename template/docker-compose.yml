@@ -11,11 +11,11 @@ services:
     ports:
       - "${PORT_HTTP}:80"
     depends_on:
-      - php
+      - php-fpm
     networks:
       - my_network
 
-  php:
+  php-fpm:
     build:
       context: .
       dockerfile: Dockerfile-php
@@ -60,7 +60,6 @@ services:
       - ${VOLUME_PREFIX}/database/phpmyadmin:/var/www/html/tmp:rw
       - ${VOLUME_PREFIX}/logs/phpmyadmin:/var/log/php
       - ./config/php.ini:/etc/php83/php.ini:ro
-      # - ./config/phpmyadmin.php:/var/www/html/config.inc.php
     ports:
       - "${PORT_PHPMYADMIN}:80"
     depends_on:
