@@ -20,6 +20,14 @@ If you are in rush and want to build it quickly run:
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
 ```
 
+If you want to jump on bash of a container:
+
+```bash
+docker exec -it yasnachap_ir_phpmyadmin /bin/sh
+or
+docker exec -it yasnachap_ir_filemanager /bin/sh
+```
+
 To manage Docker containers for your sites, follow these steps:
 
 **1. Bringing Down Existing Containers**
