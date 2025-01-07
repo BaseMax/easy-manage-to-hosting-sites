@@ -28,6 +28,7 @@ and
 
 ```
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env down
+docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up -d
 or
 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up --build
