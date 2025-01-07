@@ -90,4 +90,4 @@ RUN chmod +x /usr/local/bin/set_permissions.sh
 WORKDIR /var/www/html
 EXPOSE 9000
 
-CMD ["sh", "-c", "/usr/local/bin/set_permissions.sh && exec php-fpm"]
+CMD ["sh", "-c", "php-fpm & sh -c "/usr/local/bin/set_permissions.sh && fg"]

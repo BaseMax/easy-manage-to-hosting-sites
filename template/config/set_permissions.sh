@@ -1,26 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
-# Set ownership and permissions
+# Set ownership for the entire directory first (this will be fast and recursive)
 chown -R www-data:www-data /var/www/html
 
-# Apply permissions to files and directories
-find /var/www/html -exec chown www-data:www-data {} \;
-find /var/www/html -type d -exec chmod 755 {} \;
-find /var/www/html -type f -exec chmod 644 {} \;
+# Apply permissions for directories and files in a single step to avoid multiple passes
+find /var/www/html -type d -exec chmod 755 {} \;  # Directories with 755
+find /var/www/html -type f -exec chmod 644 {} \;  # Files with 644
 
-# Special permissions for wp-config.php
+# Special permissions for wp-config.php (only if it exists)
 if [ -f /var/www/html/wp-config.php ]; then
     chgrp www-data /var/www/html/wp-config.php
     chmod 660 /var/www/html/wp-config.php
-else
-    echo "Error: './wp-config.php' not found."
 fi
 
-# Special permissions for wp-content directory
+# Special permissions for wp-content directory (only if it exists)
 if [ -d /var/www/html/wp-content ]; then
-    find /var/www/html/wp-content -exec chgrp www-data {} \;
-    find /var/www/html/wp-content -type d -exec chmod 775 {} \;
-    find /var/www/html/wp-content -type f -exec chmod 664 {} \;
-else
-    echo "Directory './wp-content' does not exist"
+    find /var/www/html/wp-content -type d -exec chmod 775 {} \;  # Directories with 775
+    find /var/www/html/wp-content -type f -exec chmod 664 {} \;  # Files with 664
 fi
