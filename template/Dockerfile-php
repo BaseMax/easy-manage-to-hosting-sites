@@ -78,7 +78,10 @@ RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902
 COPY ./assets/ixed.8.1.lin /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
 
+RUN echo "extension=mysqli" > /usr/local/etc/php/conf.d/mysqli.ini
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 
 RUN cp /usr/lib/php81/modules/* /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
 
