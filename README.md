@@ -17,6 +17,8 @@ This will synchronize the required files and configurations as per your setup.
 If you are in rush and want to build it quickly run:
 
 ```bash
+docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
+or
 COMPOSE_DOCKER_CLI_BUILD=0 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
 ```
 
