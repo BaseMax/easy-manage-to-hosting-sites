@@ -26,6 +26,7 @@ RUN apk update --no-cache && \
     php-opcache \
     php-zip \
     php-tokenizer \
+    icu-data-full \
     php-pecl-xdebug \
     wget \
     unzip \
