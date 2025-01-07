@@ -1,8 +1,8 @@
 FROM alpine:latest 
 
-RUN apk update \
-  && apk upgrade \
-  && apk add \
+RUN apk update --no-cache && \
+    apk upgrade --no-cache && \
+    apk add --no-cache \
     nginx \
     php \
     php-fpm \
