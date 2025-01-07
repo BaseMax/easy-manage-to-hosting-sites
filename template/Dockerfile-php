@@ -81,37 +81,16 @@ RUN rm -rf /tmp/sourceguardian /tmp/loaders.linux_x86_64.tar.gz
 
 RUN apk add --no-cache shadow
 
-RUN useradd -m -u 1000 phpuser
-RUN usermod -a -G www-data phpuser
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN chown -R www-data:www-data /usr/local/lib/php/extensions
-RUN chown -R www-data:www-data /var/www/html
+
+COPY ./config/set_permissions.sh /usr/local/bin/set_permissions.sh
+
+RUN chmod +x /usr/local/bin/set_permissions.sh
 
 WORKDIR /var/www/html
 
-RUN find . -exec chown www-data:www-data {} \;
-RUN find . -type d -exec chmod 755 {} \;
-RUN find . -type f -exec chmod 644 {} \;
-
-RUN if [ -f ./wp-config.php ]; then \
-        chgrp www-data ./wp-config.php && \
-        chmod 660 ./wp-config.php; \
-    else \
-        echo "Error: './wp-config.php' not found."; \
-    fi
-
-RUN if [ -d "./wp-content" ]; then \
-    find ./wp-content -exec chgrp www-data {} \; && \
-    find ./wp-content -type d -exec chmod 775 {} \; && \
-    find ./wp-content -type f -exec chmod 664 {} \; \
-else \
-    echo "Directory './wp-content' does not exist"; \
-fi
-
-RUN php -v
-
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["sh", "-c", "/usr/local/bin/set_permissions.sh && php-fpm"]
