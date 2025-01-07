@@ -46,6 +46,7 @@ RUN apk update --no-cache && \
     icu-data-full
 
 RUN apk add --no-cache php81-pecl-xdebug php81-pecl-redis php81-gettext php81-curl php81-dom php81-fileinfo php81-gd php81-mysqli php81-pdo php81-pdo_mysql php81-zip php81-intl php81-mbstring php81-soap php81-xml php81-opcache --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted
+RUN apk add --no-cache pcre2 pcre2-dev autoconf gcc g++ make
 
 COPY ./assets/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini
@@ -54,6 +55,8 @@ COPY ./assets/ixed.8.1.lin /usr/local/lib/php/extensions/no-debug-non-zts-202109
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ixed.8.1.lin" > /usr/local/etc/php/conf.d/00-sourceguardian.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN cp /usr/lib/php81/modules/* /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
 
 RUN chown -R www-data:www-data /usr/local/lib/php/extensions
 
