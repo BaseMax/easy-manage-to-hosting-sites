@@ -77,6 +77,8 @@ RUN apk add --no-cache postfix-pcre
 
 RUN docker-php-ext-install mysqli
 
+RUN docker-php-ext-install soap
+
 COPY ./assets/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini
 
