@@ -29,6 +29,8 @@ RUN apk add \
     mkdir -p /run/nginx
 
 COPY ./assets/phpmyadmin.zip /tmp/phpmyadmin.zip
+COPY ./config/phpmyadmin.php /var/www/html/config.inc.php
+
 RUN unzip /tmp/phpmyadmin.zip -d /var/www/html/ && \
     rm /tmp/phpmyadmin.zip
 
