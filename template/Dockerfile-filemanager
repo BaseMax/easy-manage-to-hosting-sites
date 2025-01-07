@@ -41,11 +41,8 @@ RUN apk update --no-cache && \
     make \
     curl && \
     mkdir -p /var/www/html && \
+    mkdir -p /var/www/filemanager && \
     mkdir -p /run/nginx
-
-COPY ./config/set_permissions.sh /usr/local/bin/set_permissions.sh
-RUN chmod +x /usr/local/bin/set_permissions.sh
-RUN sh -c /usr/local/bin/set_permissions.sh
 
 WORKDIR /var/www
 EXPOSE 80
