@@ -71,7 +71,7 @@ RUN apk update --no-cache && \
     --repository https://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted
 
 RUN mkdir -p /var/www/html && \
-    mkdir -p /var/www/filemanager && \
+    mkdir -p /var/www/filemanager
 
 RUN apk add --no-cache postfix-pcre
 
