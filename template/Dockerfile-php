@@ -68,7 +68,7 @@ RUN apk update --no-cache && \
     gcc \
     g++ \
     make \
-    --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted
+    --repository https://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted
 
 RUN apk add --no-cache postfix-pcre
 
