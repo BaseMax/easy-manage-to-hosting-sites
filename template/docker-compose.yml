@@ -39,6 +39,8 @@ services:
       - ${VOLUME_PREFIX}/root:/var/www/html:rw
       - ${VOLUME_PREFIX}/logs/php:/var/log/php:rw
       - ./config/php.ini:/usr/local/etc/php/php.ini:ro
+    depends_on:
+      - mariadb
     environment:
       PHP_IDE_CONFIG: "serverName=docker"
     networks:
@@ -77,8 +79,6 @@ services:
       - ./config/php.ini:/etc/php83/php.ini:ro
     ports:
       - "${PORT_FILEMANAGER}:80"
-    depends_on:
-      - mariadb
     environment:
       FILEMANAGER_USERNAME: ${FILEMANAGER_USERNAME}
       FILEMANAGER_PASSWORD: ${FILEMANAGER_PASSWORD}
