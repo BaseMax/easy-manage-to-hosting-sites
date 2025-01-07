@@ -39,8 +39,9 @@ RUN apk update --no-cache && \
     gcc \
     g++ \
     make \
-    curl && \
-    mkdir -p /var/www/html && \
+    curl
+
+RUN mkdir -p /var/www/html && \
     mkdir -p /var/www/filemanager && \
     mkdir -p /run/nginx
 
