@@ -36,6 +36,8 @@ docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.e
 If you want to jump on bash of a container:
 
 ```bash
+docker exec -it yasnachap_ir_php /bin/sh
+or
 docker exec -it yasnachap_ir_phpmyadmin /bin/sh
 or
 docker exec -it yasnachap_ir_filemanager /bin/sh

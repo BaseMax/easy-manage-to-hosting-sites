@@ -18,6 +18,9 @@ RUN apk update --no-cache && \
     php-dom \
     php-ctype \
     php-fileinfo \
+    php-pdo \
+    php-pdo_mysql \
+    php-soap \
     php-opcache \
     php-zip \
     php-tokenizer \
@@ -32,9 +35,9 @@ RUN apk update --no-cache && \
     gcc \
     g++ \
     make \
-    curl \
-  && mkdir -p /var/www/html \
-  && mkdir -p /run/nginx
+    curl && \
+    mkdir -p /var/www/html && \
+    mkdir -p /run/nginx
 
 WORKDIR /var/www/html
 EXPOSE 80

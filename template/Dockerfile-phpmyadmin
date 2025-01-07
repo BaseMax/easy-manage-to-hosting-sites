@@ -18,6 +18,9 @@ RUN apk update --no-cache && \
     php-dom \
     php-ctype \
     php-fileinfo \
+    php-pdo \
+    php-pdo_mysql \
+    php-soap \
     php-opcache \
     php-zip \
     php-tokenizer \
@@ -35,6 +38,8 @@ RUN apk update --no-cache && \
     curl && \
     mkdir -p /var/www/html && \
     mkdir -p /run/nginx
+
+RUN apk add --no-cache php-pecl-xdebug
 
 COPY ./assets/phpmyadmin.zip /tmp/phpmyadmin.zip
 COPY ./config/phpmyadmin.php /var/www/html/config.inc.php
