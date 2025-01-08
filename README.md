@@ -17,38 +17,38 @@ This will synchronize the required files and configurations as per your setup.
 If you are in rush and want to build it quickly run:
 
 ```bash
-docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
+docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env build --parallel
 or
-COMPOSE_DOCKER_CLI_BUILD=0 docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
+COMPOSE_DOCKER_CLI_BUILD=0 docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env build --parallel
 or
-set "COMPOSE_DOCKER_CLI_BUILD=1" & set "DOCKER_BUILDKIT=1" & docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --parallel
+set "COMPOSE_DOCKER_CLI_BUILD=1" & set "DOCKER_BUILDKIT=1" & docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env build --parallel
 ```
 
 and
 
 ```
-docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env down
-docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up
-docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up -d
+docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env down
+docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env up
+docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env up -d
 or
-docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env up --build
-docker-compose -f template/docker-compose.yml --env-file dockers/yasnachap.ir/.env build --no-cache
+docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env up --build
+docker-compose -f template/docker-compose.yml --env-file dockers/wp.maxbase.ir/.env build --no-cache
 ```
 
 If you want to jump on bash of a container:
 
 ```bash
-docker exec -it yasnachap_ir_php /bin/sh
+docker exec -it wp_maxbase_ir_php /bin/sh
 or
-docker exec -it yasnachap_ir_phpmyadmin /bin/sh
+docker exec -it wp_maxbase_ir_phpmyadmin /bin/sh
 or
-docker exec -it yasnachap_ir_filemanager /bin/sh
+docker exec -it wp_maxbase_ir_filemanager /bin/sh
 ```
 
 If you want to watch logs of a container:
 
 ```
-docker logs -f yasnachap_ir_php
+docker logs -f wp_maxbase_ir_php
 ```
 
 To manage Docker containers for your sites, follow these steps:
@@ -94,20 +94,20 @@ docker-compose --env-file ../dockers/wp.maxbase.ir/.env down
 docker-compose --env-file ../dockers/wp.maxbase.ir/.env up --build
 ```
 
-**Step 3: Launch the Second WordPress Site (yasnachap.ir)**
+**Step 3: Launch the Second WordPress Site (wp.maxbase.ir)**
 
-Similarly, to manage the containers for yasnachap.ir:
+Similarly, to manage the containers for wp.maxbase.ir:
 
 ```bash
-docker-compose --env-file ../dockers/yasnachap.ir/.env down
-docker-compose --env-file ../dockers/yasnachap.ir/.env up --build
+docker-compose --env-file ../dockers/wp.maxbase.ir/.env down
+docker-compose --env-file ../dockers/wp.maxbase.ir/.env up --build
 ```
 
 This will bring up the second WordPress site and ensure the environment is built correctly.
 
 ### Notes
 
-- Ensure that the .env files for each site (wp.maxbase.ir and yasnachap.ir) are properly configured before running the commands.
+- Ensure that the .env files for each site (wp.maxbase.ir and wp.maxbase.ir) are properly configured before running the commands.
 - You can add more sites following the same process of configuring environment files and running the docker-compose commands.
 - If you encounter any issues with file sync or Docker builds, make sure the paths and environment configurations are correct.
 
